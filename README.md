@@ -1,6 +1,6 @@
 # Python Learingn...
 
-# Task Todo
+# Tasks
 
 <h2>Cacluator Interpreter</h2>
 
