@@ -8,14 +8,11 @@ from anytree import NodeMixin
 #             self.children = children
 
 class Node( object ):
-    parent = None
-    label = "AST"
-    children = []
-    value = {
-        "val":None
-    }
     def __init__( self ):
-        pass
+        self.label = "AST"
+        self.parent = None
+        self.value = dict()
+        self.children = []
 
     def accept( self, visitor, table = None ):
         pass
