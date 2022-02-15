@@ -176,13 +176,35 @@ class Lexer:
 class Parser:
     def __init__(self,lexer):
         self.lexer = Lexer("")
-    def calc():
+    def calc(self):
+
         pass
-    def stmt():
+    
+    def stmt(self):
         pass
-    def ass():
+    
+    def ass(self):
         pass
-    def expr():
+    
+    def expr(self):
+        pass
+
+    def exprmath(self):
+        pass
+    
+    def exprord0(self):
+        pass
+
+    def exprord1(self):
+        pass
+
+    def exprcabsol(self):
+        pass
+
+    def exprunary(self):
+        pass
+
+    def exprprim(self):
         pass
 
 #compiler
