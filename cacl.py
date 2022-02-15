@@ -251,10 +251,18 @@ class Parser:
             print("syntax error : expected expersion after ",k)
         
     def exprpriority0(self):
-        pass
+        expr1 = self.exprpriority1()
+
+        if self.infollow(priority0):
+            opr = self.nextd()
+            expr2 = self.expr()
 
     def exprpriority1(self):
-        pass
+        expr1 = self.expr()
+
+        if self.infollow(priority1):
+            opr = self.nextd()
+            expr2 = self.expr()
 
     def exprcabsol(self):
         pass
