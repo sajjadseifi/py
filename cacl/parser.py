@@ -1,12 +1,10 @@
 #Resolve Ambiguity
 '''
-    
-
     expr := expr-ass
 
     expr-ass := expr-unary |
             expr-unary = expr
-    
+
     unary-oprator := + |
                      - 
 
@@ -31,10 +29,8 @@
         num
 '''
 from cacl.lexer import Lexer
-
-unary = ["-","+"]
-priority0 = ["-","+"]
-priority1 = ["*","/","%"]
+import cacl.ast as Ast
+from cacl.utils import priority0,priority1,unary 
 
 class Parser:
     def __init__(self,lexer: Lexer):
@@ -45,7 +41,7 @@ class Parser:
 
     def nextd(self):
         return self.lexer.droptoken().text
-    
+ 
     def infollow(self,toks):
         flw = self.nextg()
         
@@ -58,101 +54,93 @@ class Parser:
         
         return False
 
+    def parse(self):
+        return self.calc()
+
     def calc(self):
         if self.lexer.eof():
-            return
+            return Ast.ASTCalc0()
 
-        self.stmt()
-        self.calc()        
+        return Ast.ASTCalc1(self.stmt(),self.calc())
     
     def stmt(self):
-        expr = None
         if self.infollow("print"):
             self.nextd()
-            expr = self.expr()
+            return Ast.ASTStmtPrint(self.expr())
         else:
-            expr = self.expr()
-        return expr
+            return Ast.ASTStmtExpr(self.expr())
 
     def expr(self):
         return self.ass()
-   
+
     def ass(self):
         expr = self.exprunary()
 
-        while self.infollow("="):
-            # if not "iden".isidentifier():
-            #     print("syntax error : expected identifier")
+        if self.infollow("="):
             self.nextd()
-            expr2 = self.expr()
+            return Ast.ASTExprAss(expr,self.expr())
 
         return expr
 
     def unaryoprator(self):
-        isun = False
-        while self.infollow(unary):
-            isun = True
-            self.unaryoprator()
+        if self.infollow(unary):
+            return Ast.ASTExprUnary(self.nextd())
         
-        return isun
+        return None
 
     def exprunary(self):
-        expr = None
-        uns = self.unaryoprator()
+        opast = self.unaryoprator()
         
-        if uns:
-            expr = self.expr()
-        else:
-            expr = self.exprpriority0()
-        
-        return expr
+        if opast:
+            return Ast.ASTExprUnary(opast,self.expr())
+
+        return self.exprpriority0()
 
     def exprpriority0(self):
-        expr1 = self.exprpriority1()
+        e1 = self.exprpriority1()
 
         if self.infollow(priority0):
             opr = self.nextd()
-            expr2 = self.exprpriority1()
+            e2 = self.exprpriority1()
+            return Ast.ASTExprCacluate(e1,opr,e2)
 
-        return expr1
+        return e1
 
     def exprpriority1(self):
-        expr1 = self.exprcabsol()
+        e1 = self.exprcabsol()
 
         if self.infollow(priority1):
             opr = self.nextd()
-            expr2 = self.exprcabsol()
+            e2 = self.exprpriority1()
+            return Ast.ASTExprCacluate(e1,opr,e2)
 
-        return expr1
+        return e1
 
     def exprcabsol(self):
-        expr = None
         if not self.infollow("("):
-            expr = self.exprprim()
-        else:
-            self.nextd()
-            expr = self.expr()
+            return self.exprprim()
 
-            if self.infollow(")"):
-                self.nextd()
-            else:
-                print("syntax error : expected )")
+        self.nextd()
+        expr = self.expr()
+
+        if self.infollow(")"):
+            self.nextd()
+        else:
+            print("syntax error : expected )")
+
         return expr
 
     def exprprim(self):
         if(self.nextg().isnumeric()):
-            num = self.nextd()
-            print("num",num)
-            return num  
+            return Ast.ASTNum(self.nextd())
         elif(self.nextg().isidentifier()):
             iden = self.nextd()
-            print("iden",iden)
+
             if self.infollow(":"):
                 self.nextd()
                 expr = self.expr()
-                print("call",iden)
-                return expr
+                return Ast.ASTExprCall(iden,expr)
 
-            return iden
+            return Ast.ASTIden(iden)
         else:
             return None
