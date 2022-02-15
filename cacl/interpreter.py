@@ -1,5 +1,8 @@
 import ast_calc as AST
 
+#semantic
+def val(ast : AST.Node):
+    return ast.value.get("val")    
 
 def interpret(ast : AST.Node):
     if isinstance(ast,AST.ASTCalc):
@@ -15,8 +18,11 @@ def calc(ast : AST.Node):
     
 def stmt(ast : AST.Node):
     if isinstance(ast,AST.ASTStmtExpr):
-        pass
+        expr(ast)
     elif isinstance(ast,AST.ASTStmtPrint):
-        pass
+        print(val(ast))
     else:
         print("ast error: this ast is not stmt");
+
+def expr(ast : AST.Node):
+    pass
