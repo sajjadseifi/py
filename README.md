@@ -18,27 +18,20 @@ Grammar :
     calc := |
         stmt calc
 
-    stmt :=     |
-        ass     |
+    stmt :=   expr  |
         print expr
-            
-    ass :=
-        iden = expr
 
     expr :=
-        rad expr    |
-        sin expr    |
-        cos expr    |
-        tan expr    |
-        cot expr    |
+        iden = expr |
         expr + expr |
         expr - expr |
         expr / expr |
         expr * expr |
         expr % expr |
-        + expr      |
-        - expr      |
         (expr)      |
+        - expr      |
+        + expr      |
+        iden expr   |
         iden        |
         num
 ```
