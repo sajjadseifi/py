@@ -63,6 +63,9 @@ class Lexer:
     def nextch(self):
         c = self.file.read(1)
         return c 
+    def eof(self):
+        tok = self.gettoken()
+        return tok.text == None
 
     def gettoken(self):
         saved = self.file.tell()
