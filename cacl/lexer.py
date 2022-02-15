@@ -7,7 +7,7 @@
     comment := #[^\n]*
 '''
 
-from tokenize import Token
+from cacl.token import Token
 
 class Lexer:
     new_line = False
