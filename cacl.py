@@ -202,7 +202,8 @@ class Parser:
     
     def stmt(self):
         
-        if self.nextg() == "print":
+        if self.infollow("print"):
+            self.nextd()
             self.expr()
         else:
             self.ass()
@@ -213,7 +214,9 @@ class Parser:
         if not iden.isidentifier():
             print("syntax error : expected identifier")
         
-        if self.nextd() != "=":
+        if self.infollow("="):
+            self.nextd()
+        else:
             print("syntax error : expected =")
 
         expr = self.expr()
