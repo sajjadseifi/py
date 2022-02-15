@@ -31,7 +31,7 @@ Grammar :
         (expr)      |
         - expr      |
         + expr      |
-        iden expr   |
+        iden:expr   |
         iden        |
         num
 ```
