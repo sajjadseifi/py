@@ -31,6 +31,27 @@ def stmt(ast : AST.Node):
 
 def expr(ast : AST.Node):
     if isinstance(ast,AST.ASTExprAss):
-        
-        pass
+        exprass(ast)    
+    elif isinstance(ast,AST.ASTExprUnary):
+        exprunary(ast)    
+    elif isinstance(ast,AST.ASTExprCacluate):
+        exprcalc(ast)    
+    elif isinstance(ast,AST.ASTExprCall):
+        exprmath(ast)    
+    elif isinstance(ast,AST.ASTNum):
+        exprprim(ast)    
+
+def exprass(ast : AST.ASTExprAss):
+    pass
+
+def exprunary(ast : AST.ASTExprUnary):
+    pass
+
+def exprcalc(ast : AST.Node):
+    pass
+
+def exprmath(ast : AST.Node):
+    pass
+
+def exprprim(ast : AST.Node):
     pass
