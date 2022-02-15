@@ -1,9 +1,9 @@
 # Grammar Calculator
 '''
     calc := |
-        body calc
+        stmt calc
 
-    body :=     |
+    stmt :=     |
         ass     |
         print expr
             
@@ -44,7 +44,7 @@ class Token:
         self.text = text
         self.line = line
         self.offset = offset
-
+    
 class Lexer:
     new_line = False
     line = 1
