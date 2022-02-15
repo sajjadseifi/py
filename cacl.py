@@ -133,6 +133,19 @@ class Lexer:
 
         return tok
 
+#Parser
+
+class Parser:
+    def __init__(self,lexer):
+        self.lexer = Lexer("")
+    def calc():
+        pass
+    def stmt():
+        pass
+    def ass():
+        pass
+    def expr():
+        pass
 
 #compiler
 lex = Lexer("./test/0")
