@@ -237,9 +237,19 @@ class Parser:
         else:
             self.exprpriority0()
 
+        return None
+
     def exprmath(self):
-        pass
-    
+        if not self.infollow(keywords):
+            print("syntax error : expected keyword")
+        
+        k = self.nextd()
+
+        expr = self.expr()
+
+        if not expr:
+            print("syntax error : expected expersion after ",k)
+        
     def exprpriority0(self):
         pass
 
