@@ -6,7 +6,9 @@ def pre_parse(ast :AST.Node):
     setnumval(ast)
 
 def setnumval(ast : AST.Node):
-    for ast in ast.children:
+    for cast in ast.children:
         if isinstance(ast,AST.ASTNum):
-            valset(ast,ast.num)
-        setnumval(ast)
+            valset(ast,int(ast.num))
+
+        if isinstance(cast,AST.Node):
+            setnumval(cast)
