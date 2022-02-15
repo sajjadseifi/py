@@ -42,15 +42,36 @@ def expr(ast : AST.Node):
         exprprim(ast)    
 
 def exprass(ast : AST.ASTExprAss):
-    pass
+    name = ast.iden.name
+    val = valget(ast.expr)
+    symtbl.put(name,val)
 
 def exprunary(ast : AST.ASTExprUnary):
     pass
 
-def exprcalc(ast : AST.Node):
+def exprcalc(ast : AST.ASTExprCacluate):
     pass
 
-def exprmath(ast : AST.Node):
+def exprmath(ast : AST.ASTExprCall):
+    #call math function
+    math = ast.iden.name
+    #radian value
+    val = valget(ast.expr)
+
+    upval = val
+
+    if math == "rad":
+        upval = 1
+    elif math == "cot":
+        upval = 2
+    elif math == "tan":
+        upval = 3
+    elif math == "sin":
+        upval = 4
+    elif math == "cos":
+        upval = 5
+
+    valset(ast,upval) 
     pass
 
 def exprprim(ast : AST.Node):
