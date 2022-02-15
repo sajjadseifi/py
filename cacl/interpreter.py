@@ -2,12 +2,12 @@ import ast_calc as AST
 from symbols_calc import Symbols 
 #semantic
 
-symtbl = Symbols()
-
 def valget(ast : AST.Node):
     return ast.value["val"]    
 def valset(ast : AST.Node,val):
     ast.value["val"] = val
+
+symtbl = Symbols()
 
 def interpret(ast : AST.Node):
     if isinstance(ast,AST.ASTCalc):
@@ -38,7 +38,7 @@ def expr(ast : AST.Node):
         exprcalc(ast)    
     elif isinstance(ast,AST.ASTExprCall):
         exprmath(ast)    
-    elif isinstance(ast,AST.ASTNum):
+    elif isinstance(ast,AST.ASTNum) or isinstance(ast,AST.ASTIden):
         exprprim(ast)    
 
 def exprass(ast : AST.ASTExprAss):
@@ -54,4 +54,9 @@ def exprmath(ast : AST.Node):
     pass
 
 def exprprim(ast : AST.Node):
-    pass
+    if isinstance(ast,AST.ASTNum):
+        valset(ast,ast.children[0])
+    elif isinstance(ast,AST.ASTIden):
+        name = ast.children[0]
+        val  = symtbl.get(name)
+        valset(ast,val)
