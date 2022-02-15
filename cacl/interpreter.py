@@ -21,7 +21,7 @@ def stmt(ast : AST.ASTStmt):
     elif isinstance(ast,AST.ASTStmtPrint):
         cast = ast.first()
         expr(cast)
-        print(valget(cast))
+        print("print -> %s" % valget(cast))
     else:
         print("ast error: this ast is not stmt");
 
@@ -71,7 +71,7 @@ def exprcalc(ast : AST.ASTExprCacluate):
     elif opr == "%":
         val = valget(ast.left) % valget(ast.right)
 
-    print("calc %s = %s %s %s" %
+    print("calc -> %s = %s %s %s" %
         (
             val,
             valget(ast.left),
@@ -102,7 +102,7 @@ def exprmath(ast : AST.ASTExprCall):
     elif math == "cos":
         upval = 5
 
-    print("call %s(%s)" %(math,upval))
+    print("call -> %s(%s)" %(math,upval))
     
     valset(ast,upval) 
 
