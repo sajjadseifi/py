@@ -141,11 +141,11 @@ class Lexer:
 '''
     Resolve Ambiguity
 
-    expr :=         |
-        expr-math   |
-        expr-ord-0  |
-        expr-capsol |
-        expr-unary  |
+    expr :=             |
+        expr-math       |
+        expr-priority-0 |
+        expr-capsol     |
+        expr-unary      |
         expr-prim
 
     expr-math :=
@@ -155,13 +155,13 @@ class Lexer:
         tan expr    |
         cot expr    
     
-    expr-ord-0 :=         |
-        expr-ord-0 + expr |
-        expr-ord-0 - expr     
+    expr-priority-0 :=         |
+        expr-priority-0 + expr |
+        expr-priority-0 - expr     
 
-    expr-ord-1 :=       |
-        expr / expr     |
-        expr * expr     |
+    expr-priority-1 :=      |
+        expr / expr         |
+        expr * expr         |
         expr % expr 
 
     expr-capsol :=  |
@@ -197,10 +197,10 @@ class Parser:
     def exprmath(self):
         pass
     
-    def exprord0(self):
+    def exprpriority0(self):
         pass
 
-    def exprord1(self):
+    def exprpriority1(self):
         pass
 
     def exprcabsol(self):
