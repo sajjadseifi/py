@@ -7,20 +7,21 @@ symtbl = Symbols()
 def interpret(ast : AST.Node):
     if isinstance(ast,AST.ASTCalc):
         calc(ast)
-        print("finished");
     else:
         print("ast error: please entered root ast calc");
 
 def calc(ast : AST.Node):
     if len(ast.children):
-        stmt(ast.children[0])
+        stmt(ast.first())
         interpret(ast.children[1])
     
-def stmt(ast : AST.Node):
+def stmt(ast : AST.ASTStmt):
     if isinstance(ast,AST.ASTStmtExpr):
-        expr(ast)
+        expr(ast.first())
     elif isinstance(ast,AST.ASTStmtPrint):
-        print(valget(ast))
+        cast = ast.first()
+        expr(cast)
+        print(valget(cast))
     else:
         print("ast error: this ast is not stmt");
 
@@ -38,8 +39,12 @@ def expr(ast : AST.Node):
 
 def exprass(ast : AST.ASTExprAss):
     name = ast.iden.name
+    expr(ast.expr)
     val = valget(ast.expr)
     symtbl.put(name,val)
+    valset(ast,val)
+
+    print("ass -> %s = %s" % (name,val))
 
 def exprunary(ast : AST.ASTExprUnary):
     opr = ast.oprator
@@ -52,6 +57,9 @@ def exprcalc(ast : AST.ASTExprCacluate):
     val = 0;
     opr = ast.oprator
     
+    expr(ast.left)
+    expr(ast.right)
+
     if opr == "-":
         val = valget(ast.left) - valget(ast.right)
     elif opr == "+":
@@ -63,12 +71,22 @@ def exprcalc(ast : AST.ASTExprCacluate):
     elif opr == "%":
         val = valget(ast.left) % valget(ast.right)
 
+    print("calc %s = %s %s %s" %
+        (
+            val,
+            valget(ast.left),
+            opr,
+            valget(ast.right)
+        )
+    )
+
     valset(ast,val)
 
 def exprmath(ast : AST.ASTExprCall):
     #call math function
     math = ast.iden.name
     #radian value
+    expr(ast.expr)
     val = valget(ast.expr)
 
     upval = val
@@ -85,12 +103,11 @@ def exprmath(ast : AST.ASTExprCall):
         upval = 5
 
     valset(ast,upval) 
-    pass
 
 def exprprim(ast : AST.Node):
     if isinstance(ast,AST.ASTNum):
-        valset(ast,ast.children[0])
+        valset(ast,int(ast.num))
     elif isinstance(ast,AST.ASTIden):
-        name = ast.children[0]
+        name = ast.name
         val  = symtbl.get(name)
-        valset(ast,val)
+        valset(ast,int(val))
