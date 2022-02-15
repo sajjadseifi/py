@@ -180,8 +180,10 @@ class Parser:
     def __init__(self,lexer):
         self.lexer = Lexer("")
     def calc(self):
-
-        pass
+        if self.lexer.eof():
+            return
+        self.stmt()
+        self.calc()        
     
     def stmt(self):
         pass
