@@ -36,6 +36,8 @@ Grammar :
         expr / expr |
         expr * expr |
         expr % expr |
+        + expr      |
+        - expr      |
         (expr)      |
         iden        |
         num
