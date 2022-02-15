@@ -49,7 +49,21 @@ def exprunary(ast : AST.ASTExprUnary):
         valset(ast, -valget(ast))
 
 def exprcalc(ast : AST.ASTExprCacluate):
-    pass
+    val = 0;
+    opr = ast.oprator
+    
+    if opr == "-":
+        val = valget(ast.left) - valget(ast.right)
+    elif opr == "+":
+        val = valget(ast.left) + valget(ast.right)
+    elif opr == "*":
+        val = valget(ast.left) * valget(ast.right)
+    elif opr == "/":
+        val = valget(ast.left) / valget(ast.right)
+    elif opr == "%":
+        val = valget(ast.left) % valget(ast.right)
+
+    valset(ast,val)
 
 def exprmath(ast : AST.ASTExprCall):
     #call math function
