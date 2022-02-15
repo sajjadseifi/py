@@ -32,13 +32,23 @@
     comment := #[^\n]*
 '''
 #Lexical
+from math import fabs
 import re
 
 #regex
 idpat = re.compile('/^[A-Za-z_][A-Za-z_0-9]*$/')
 numpat = re.compile('/^[0-9]+$/')
 
+class Token:
+    def __init__(self, text,line,offset):
+        self.text = text
+        self.line = line
+        self.offset = offset
+
 class Lexer:
+    new_line = False
+    line = 1
+    offset = 0
     def __init__(self, file):
         self.file = open(file,'r')
     
@@ -50,7 +60,8 @@ class Lexer:
         self.nextch()
     
     def nextch(self):
-        return self.file.read(1)
+        c = self.file.read(1)
+        return c 
 
     def gettoken(self):
         saved = self.file.tell()
@@ -61,23 +72,25 @@ class Lexer:
     def droptoken(self):
         chunk = self.nextch()
         self.seekprev()
-
-        if(chunk.isspace()):
+        self.offset = self.file.tell()  
+        tok = ''
+        if chunk.isspace():
             self.whitespace()
             return self.droptoken()
-        elif(chunk.isalpha()):
-            return self.iden()
-        elif(chunk.isnumeric()):
-            return self.num()
-        elif(chunk == "#"):
+        elif chunk == "#":
             self.comment()
             return self.droptoken()
-        elif(chunk == ''):
-            self.seeknext()
-            return chunk
+        if chunk.isalpha():
+            tok = self.iden()
+        elif chunk.isnumeric():
+            tok = self.num()
+        elif chunk == '':
+            return Token(None,self.line,self.offset)
         else:
             self.seeknext()
-            return chunk
+            tok = chunk
+
+        return Token(tok,self.line,self.offset)
 
     def whitespace(self):
         c = self.nextch()
@@ -126,6 +139,6 @@ lex = Lexer("./test/0")
 
 while True:
     t = lex.droptoken()
-    if not t:
+    if not t.text:
         break
-    print("token : %s" % t)
+    print("token : %s" % t.text)
