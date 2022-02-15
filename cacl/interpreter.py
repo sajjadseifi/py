@@ -1,8 +1,12 @@
 import ast_calc as AST
 
 #semantic
+
 def val(ast : AST.Node):
     return ast.value.get("val")    
+
+# Table[name,value]
+symbols = dict()
 
 def interpret(ast : AST.Node):
     if isinstance(ast,AST.ASTCalc):
