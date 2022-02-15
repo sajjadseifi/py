@@ -21,6 +21,9 @@ class Node( object ):
     def setparent( self, parent ):
         self.parent = parent
 
+    def first(self):
+        return self.children[0]
+
 class ASTCalc( Node ):
     label = "calc"
     def __init__( self ):
