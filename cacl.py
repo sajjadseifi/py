@@ -263,8 +263,17 @@ class Parser:
                 print("syntax error : expected )")
 
     def exprprim(self):
-        pass
+        if(self.nextg().isnumeric()):
+            return self.nextd()
+        elif(self.nextg().isidentifier()):
+            iden = self.nextd()
+            for k in keywords:
+                if iden == k:
+                    expr = self.expr()
 
+            return iden
+        else:
+            return None
 #compiler
 lex = Lexer("./test/0")
 
