@@ -185,6 +185,14 @@ class Parser:
             self.lexer.gettoken().text
         else: 
             self.lexer.droptoken().text
+    
+    def infollow(self,toks):
+        flw = self.next(True)
+        for tok in toks:
+            if flw == tok:
+                return True
+        
+        return False
 
     def calc(self):
         if self.lexer.eof():
@@ -212,6 +220,7 @@ class Parser:
         expr = self.expr()
 
     def expr(self):
+
         pass
 
     def exprmath(self):
