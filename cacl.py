@@ -16,7 +16,7 @@
         (expr)      |
         - expr      |
         + expr      |
-        iden expr   |
+        iden:expr   |
         iden        |
         num
 
@@ -158,7 +158,7 @@ class Lexer:
         (expr)      
 
     expr-prim :=    |
-        iden expr   |
+        iden:expr   |
         iden        |
         num
 '''
@@ -228,10 +228,14 @@ class Parser:
 
     def exprunary(self):
         expr = None
-        if self.unaryoprator():
+        uns = self.unaryoprator()
+        
+        if uns:
             expr = self.expr()
         else:
             expr = self.exprpriority0()
+        
+        return expr
 
     def exprpriority0(self):
         expr1 = self.exprpriority1()
@@ -240,6 +244,8 @@ class Parser:
             opr = self.nextd()
             expr2 = self.exprpriority1()
 
+        return expr1
+
     def exprpriority1(self):
         expr1 = self.exprcabsol()
 
@@ -247,7 +253,10 @@ class Parser:
             opr = self.nextd()
             expr2 = self.exprcabsol()
 
+        return expr1
+
     def exprcabsol(self):
+        expr = None
         if not self.infollow("("):
             expr = self.exprprim()
         else:
@@ -258,23 +267,22 @@ class Parser:
                 self.nextd()
             else:
                 print("syntax error : expected )")
+        return expr
 
     def exprprim(self):
         if(self.nextg().isnumeric()):
             num = self.nextd()
-            print("num",num);            
+            print("num",num)
             return num  
         elif(self.nextg().isidentifier()):
             iden = self.nextd()
+            print("iden",iden)
+            if self.infollow(":"):
+                self.nextd()
+                expr = self.expr()
+                print("call",iden)
+                return expr
 
-            for k in keywords:
-                if iden == k:
-                    expr = self.expr()
-                    print(iden,expr);
-                    return expr
-
-            print("iden",iden);
-            
             return iden
         else:
             return None
