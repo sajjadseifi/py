@@ -3,19 +3,11 @@
     calc := |
         stmt calc
 
-    stmt :=     |
-        ass     |
+    stmt :=   expr  |
         print expr
             
-    ass :=
-        iden = expr
-
     expr :=
-        rad expr    |
-        sin expr    |
-        cos expr    |
-        tan expr    |
-        cot expr    |
+        iden = expr |
         expr + expr |
         expr - expr |
         expr / expr |
@@ -23,6 +15,8 @@
         expr % expr |
         (expr)      |
         - expr      |
+        + expr      |
+        iden expr   |
         iden        |
         num
 
@@ -33,9 +27,7 @@
     comment := #[^\n]*
 '''
 #Lexical
-from math import fabs
 import re
-import this
 
 #regex
 idpat = re.compile('/^[A-Za-z_][A-Za-z_0-9]*$/')
@@ -142,8 +134,11 @@ class Lexer:
 '''
     Resolve Ambiguity
 
-    expr := expr-unary
+    expr := expr-ass
 
+    expr-ass := expr-unary |
+            expr-unary = expr
+    
     unary-oprator := + |
                      - 
 
@@ -171,10 +166,12 @@ unary = ["-","+"]
 priority0 = ["-","+"]
 priority1 = ["*","/","%"]
 keywords = ["rad","sin","cos","cot","tan"]
-
+from typing import Type, TypeVar
 class Parser:
-    def __init__(self,lexer):
-        self.lexer = Lexer("")
+
+    def __init__(self,lexer: Lexer):
+        self.lexer = lexer
+
     def nextg(self):
         return self.lexer.gettoken().text    
 
@@ -201,28 +198,25 @@ class Parser:
         self.calc()        
     
     def stmt(self):
-        
         if self.infollow("print"):
             self.nextd()
-            self.expr()
+            expr = self.expr()
         else:
-            self.ass()
-        
-    def ass(self):
-        iden = self.nextd()
-
-        if not iden.isidentifier():
-            print("syntax error : expected identifier")
-        
-        if self.infollow("="):
-            self.nextd()
-        else:
-            print("syntax error : expected =")
-
-        expr = self.expr()
+            expr = self.expr()
 
     def expr(self):
-        self.exprunary()
+        return self.ass()
+   
+    def ass(self):
+        expr = self.exprunary()
+
+        while self.infollow("="):
+            # if not "iden".isidentifier():
+            #     print("syntax error : expected identifier")
+            self.nextd()
+            expr2 = self.expr()
+
+        return expr
 
     def unaryoprator(self):
         isun = False
@@ -267,21 +261,31 @@ class Parser:
 
     def exprprim(self):
         if(self.nextg().isnumeric()):
-            return self.nextd()
+            num = self.nextd()
+            print("num",num);            
+            return num  
         elif(self.nextg().isidentifier()):
             iden = self.nextd()
+
             for k in keywords:
                 if iden == k:
                     expr = self.expr()
+                    print(iden,expr);
+                    return expr
 
+            print("iden",iden);
+            
             return iden
         else:
             return None
-#compiler
-lex = Lexer("./test/0")
 
-while True:
-    t = lex.droptoken()
-    if not t.text:
-        break
-    print("token : %s" % t.text)
+#Compiler
+lex = Lexer("./test/0")
+# while True:
+#     t = lex.droptoken()
+#     if not t.text:
+#         break
+#     print("token : %s" % t.text)
+
+pars = Parser(lex)
+pars.calc()
