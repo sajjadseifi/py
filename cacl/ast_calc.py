@@ -11,6 +11,9 @@ class Node( object ):
     parent = None
     label = "AST"
     children = []
+    value = {
+        "val":None
+    }
     def __init__( self ):
         pass
 
