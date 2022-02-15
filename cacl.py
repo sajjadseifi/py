@@ -156,21 +156,23 @@ class Lexer:
         tan expr    |
         cot expr    
     
-    expr-priority-0 :=         |
-        expr-priority-0 + expr |
-        expr-priority-0 - expr     
+    expr-priority-0 :=    expr-priority-1 |
+        expr-priority-0 + expr-priority-1 |
+        expr-priority-0 - expr-priority-1     
 
-    expr-priority-1 :=      |
-        expr / expr         |
-        expr * expr         |
-        expr % expr 
+    expr-priority-1 :=  expr-priority-1 |
+        expr-priority-1 / expr-capsol   |
+        expr-priority-1 * expr-capsol   |
+        expr-priority-1 % expr 
 
-    expr-capsol :=  |
+    expr-capsol := expr-unary |
         (expr)      
 
-    expr-unary :=   |
-        - expr-prim |
-        + expr-prim 
+    unary-oprator := + |
+                     - 
+
+    expr-unary := expr-prim  |
+        unary-oprator expr   |
 
     expr-prim :=    |
         iden        |
@@ -237,8 +239,6 @@ class Parser:
         else:
             self.exprpriority0()
 
-        return None
-
     def exprmath(self):
         if not self.infollow(keywords):
             print("syntax error : expected keyword")
@@ -277,8 +277,11 @@ class Parser:
             print("syntax error : expected )")
         
     def exprunary(self):
-        pass            
-        
+        while self.infollow(unary):
+           self.exprunary()
+
+        expr = self.expr()
+
     def exprprim(self):
         pass
 
