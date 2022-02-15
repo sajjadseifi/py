@@ -180,14 +180,14 @@ class Lexer:
 class Parser:
     def __init__(self,lexer):
         self.lexer = Lexer("")
-    def next(self,ignored):
-        if ignored:
-            self.lexer.gettoken().text
-        else: 
-            self.lexer.droptoken().text
+    def nextg(self):
+        return self.lexer.gettoken().text    
+
+    def nextd(self):
+        return self.lexer.droptoken().text
     
     def infollow(self,toks):
-        flw = self.next(True)
+        flw = self.nextg()
         
         if not isinstance(toks, list):
             return flw == toks
@@ -207,18 +207,18 @@ class Parser:
     
     def stmt(self):
         
-        if self.next(True) == "print":
+        if self.nextg() == "print":
             self.expr()
         else:
             self.ass()
         
     def ass(self):
-        iden = self.next()
+        iden = self.nextd()
 
         if not iden.isidentifier():
             print("syntax error : expected identifier")
         
-        if self.next() != "=":
+        if self.nextd() != "=":
             print("syntax error : expected =")
 
         expr = self.expr()
