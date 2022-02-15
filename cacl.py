@@ -265,11 +265,20 @@ class Parser:
             expr2 = self.expr()
 
     def exprcabsol(self):
-        pass
+        if not self.infollow("("):
+            return
+        
+        self.nextd()
+        expr = self.expr()
 
+        if self.infollow(")"):
+            self.nextd()
+        else:
+            print("syntax error : expected )")
+        
     def exprunary(self):
-        pass
-
+        pass            
+        
     def exprprim(self):
         pass
 
