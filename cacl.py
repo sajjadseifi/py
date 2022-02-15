@@ -228,7 +228,14 @@ class Parser:
         expr = self.expr()
 
     def expr(self):
-        pass
+        if self.infollow("("):
+            self.exprcabsol()
+        elif self.infollow(unary):
+            self.exprunary()
+        elif self.infollow(keywords):
+            self.exprmath()
+        else:
+            self.exprpriority0()
 
     def exprmath(self):
         pass
