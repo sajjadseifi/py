@@ -176,6 +176,10 @@ class Lexer:
         iden        |
         num
 '''
+unary = ["-","+"]
+priority0 = ["-","+"]
+priority1 = ["*","/","%"]
+keywords = ["rad","sin","cos","cot","tan"]
 
 class Parser:
     def __init__(self,lexer):
@@ -224,7 +228,6 @@ class Parser:
         expr = self.expr()
 
     def expr(self):
-
         pass
 
     def exprmath(self):
