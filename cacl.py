@@ -1,9 +1,9 @@
 # Grammar Calculator
 '''
     calc := |
-        body calc
+        stmt calc
 
-    body :=     |
+    stmt :=     |
         ass     |
         print expr
             
