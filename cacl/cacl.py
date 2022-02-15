@@ -27,13 +27,14 @@
     comment := #[^\n]*
 '''
 
-#Compiler
-from cacl.lexer import Lexer
-from cacl.parser import Parser
+#Interpreter
+from os.path import abspath
+from lexer_calc import Lexer
+from parser_tree_calc import ParserTree
 
-
-def __main__():
-    lex = Lexer("../test/0")
-    pars = Parser(lex)
-    pars.calc()
-
+faddr = "./test/0"
+addr = abspath(faddr)
+lex = Lexer(addr)
+pars = ParserTree(lex)
+ast = pars.parse()
+print(ast)

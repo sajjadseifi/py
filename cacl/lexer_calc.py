@@ -14,7 +14,7 @@
 
 '''
 
-from cacl.token import Token
+from token_calc import Token
 
 class Lexer:
     new_line = False

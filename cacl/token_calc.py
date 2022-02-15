@@ -4,4 +4,3 @@ class Token:
         self.text = text
         self.line = line
         self.offset = offset
-

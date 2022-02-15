@@ -28,11 +28,11 @@
         iden        |
         num
 '''
-from cacl.lexer import Lexer
-import cacl.ast as Ast
-from cacl.utils import priority0,priority1,unary 
+from lexer_calc import Lexer
+import ast_calc as Ast
+from utils_calc import priority0,priority1,unary 
 
-class Parser:
+class ParserTree:
     def __init__(self,lexer: Lexer):
         self.lexer = lexer
 
