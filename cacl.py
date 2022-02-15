@@ -188,6 +188,10 @@ class Parser:
     
     def infollow(self,toks):
         flw = self.next(True)
+        
+        if not isinstance(toks, list):
+            return flw == toks
+
         for tok in toks:
             if flw == tok:
                 return True
