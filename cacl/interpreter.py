@@ -102,6 +102,8 @@ def exprmath(ast : AST.ASTExprCall):
     elif math == "cos":
         upval = 5
 
+    print("call %s(%s)" %(math,upval))
+    
     valset(ast,upval) 
 
 def exprprim(ast : AST.Node):
