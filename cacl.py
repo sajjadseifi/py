@@ -22,6 +22,7 @@
         expr * expr |
         expr % expr |
         (expr)      |
+        - expr      |
         iden        |
         num
 
@@ -134,6 +135,43 @@ class Lexer:
         return tok
 
 #Parser
+'''
+    Resolve Ambiguity
+
+    expr :=         |
+        expr-math   |
+        expr-ord-0  |
+        expr-capsol |
+        expr-unary  |
+        expr-prim
+
+    expr-math :=
+        rad expr    |
+        sin expr    |
+        cos expr    |
+        tan expr    |
+        cot expr    
+    
+    expr-ord-0 :=         |
+        expr-ord-0 + expr |
+        expr-ord-0 - expr     
+
+    expr-ord-1 :=       |
+        expr / expr     |
+        expr * expr     |
+        expr % expr 
+
+    expr-capsol :=  |
+        (expr)      
+
+    expr-unary :=   |
+        - expr-prim |
+        + expr-prim 
+
+    expr-prim :=    |
+        iden        |
+        num
+'''
 
 class Parser:
     def __init__(self,lexer):
