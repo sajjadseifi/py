@@ -35,6 +35,7 @@
 #Lexical
 from math import fabs
 import re
+import this
 
 #regex
 idpat = re.compile('/^[A-Za-z_][A-Za-z_0-9]*$/')
@@ -182,12 +183,17 @@ class Parser:
     def calc(self):
         if self.lexer.eof():
             return
+
         self.stmt()
         self.calc()        
     
     def stmt(self):
-        pass
-    
+        
+        if self.lexer.gettoken() == "print":
+            self.expr()
+        
+        self.ass()
+        
     def ass(self):
         pass
     
