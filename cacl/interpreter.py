@@ -1,12 +1,7 @@
 import ast_calc as AST
+from value_calc import valget, valset
 from symbols_calc import Symbols 
 #semantic
-
-def valget(ast : AST.Node):
-    return ast.value["val"]    
-def valset(ast : AST.Node,val):
-    ast.value["val"] = val
-
 symtbl = Symbols()
 
 def interpret(ast : AST.Node):
@@ -47,7 +42,11 @@ def exprass(ast : AST.ASTExprAss):
     symtbl.put(name,val)
 
 def exprunary(ast : AST.ASTExprUnary):
-    pass
+    opr = ast.oprator
+    expr(ast.expr)
+
+    if opr == "-":
+        valset(ast, -valget(ast))
 
 def exprcalc(ast : AST.ASTExprCacluate):
     pass
