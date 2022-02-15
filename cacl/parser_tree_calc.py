@@ -134,13 +134,13 @@ class ParserTree:
         if(self.nextg().isnumeric()):
             return Ast.ASTNum(self.nextd())
         elif(self.nextg().isidentifier()):
-            iden = self.nextd()
-
+            iden = Ast.ASTIden(self.nextd())
+            
             if self.infollow(":"):
                 self.nextd()
                 expr = self.expr()
                 return Ast.ASTExprCall(iden,expr)
 
-            return Ast.ASTIden(iden)
+            return iden
         else:
             return None
