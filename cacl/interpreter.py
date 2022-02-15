@@ -1,12 +1,13 @@
 import ast_calc as AST
-
+from symbols_calc import Symbols 
 #semantic
 
-def val(ast : AST.Node):
-    return ast.value.get("val")    
+symtbl = Symbols()
 
-# Table[name,value]
-symbols = dict()
+def valget(ast : AST.Node):
+    return ast.value["val"]    
+def valset(ast : AST.Node,val):
+    ast.value["val"] = val
 
 def interpret(ast : AST.Node):
     if isinstance(ast,AST.ASTCalc):
@@ -24,9 +25,12 @@ def stmt(ast : AST.Node):
     if isinstance(ast,AST.ASTStmtExpr):
         expr(ast)
     elif isinstance(ast,AST.ASTStmtPrint):
-        print(val(ast))
+        print(valget(ast))
     else:
         print("ast error: this ast is not stmt");
 
 def expr(ast : AST.Node):
+    if isinstance(ast,AST.ASTExprAss):
+        
+        pass
     pass
