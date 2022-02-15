@@ -142,20 +142,14 @@ class Lexer:
 '''
     Resolve Ambiguity
 
-    expr :=             |
-        expr-math       |
-        expr-priority-0 |
-        expr-capsol     |
-        expr-unary      |
-        expr-prim
+    expr := expr-unary
 
-    expr-math :=
-        rad expr    |
-        sin expr    |
-        cos expr    |
-        tan expr    |
-        cot expr    
-    
+    unary-oprator := + |
+                     - 
+
+    expr-unary := expr-priority-0  |
+        unary-oprator expr         |
+
     expr-priority-0 :=    expr-priority-1 |
         expr-priority-0 + expr-priority-1 |
         expr-priority-0 - expr-priority-1     
@@ -163,18 +157,13 @@ class Lexer:
     expr-priority-1 :=  expr-priority-1 |
         expr-priority-1 / expr-capsol   |
         expr-priority-1 * expr-capsol   |
-        expr-priority-1 % expr 
+        expr-priority-1 % expr-capsol 
 
-    expr-capsol := expr-unary |
+    expr-capsol := expr-prim |
         (expr)      
 
-    unary-oprator := + |
-                     - 
-
-    expr-unary := expr-prim  |
-        unary-oprator expr   |
-
     expr-prim :=    |
+        iden expr   |
         iden        |
         num
 '''
@@ -230,57 +219,48 @@ class Parser:
         expr = self.expr()
 
     def expr(self):
-        if self.infollow("("):
-            self.exprcabsol()
-        elif self.infollow(unary):
-            self.exprunary()
-        elif self.infollow(keywords):
-            self.exprmath()
+        self.exprunary()
+
+    def unaryoprator(self):
+        isun = False
+        while self.infollow(unary):
+            isun = True
+            self.unaryoprator()
+        
+        return isun
+
+    def exprunary(self):
+        expr = None
+        if self.unaryoprator():
+            expr = self.expr()
         else:
-            self.exprpriority0()
+            expr = self.exprpriority0()
 
-    def exprmath(self):
-        if not self.infollow(keywords):
-            print("syntax error : expected keyword")
-        
-        k = self.nextd()
-
-        expr = self.expr()
-
-        if not expr:
-            print("syntax error : expected expersion after ",k)
-        
     def exprpriority0(self):
         expr1 = self.exprpriority1()
 
         if self.infollow(priority0):
             opr = self.nextd()
-            expr2 = self.expr()
+            expr2 = self.exprpriority1()
 
     def exprpriority1(self):
-        expr1 = self.expr()
+        expr1 = self.exprcabsol()
 
         if self.infollow(priority1):
             opr = self.nextd()
-            expr2 = self.expr()
+            expr2 = self.exprcabsol()
 
     def exprcabsol(self):
         if not self.infollow("("):
-            return
-        
-        self.nextd()
-        expr = self.expr()
-
-        if self.infollow(")"):
-            self.nextd()
+            expr = self.exprprim()
         else:
-            print("syntax error : expected )")
-        
-    def exprunary(self):
-        while self.infollow(unary):
-           self.exprunary()
+            self.nextd()
+            expr = self.expr()
 
-        expr = self.expr()
+            if self.infollow(")"):
+                self.nextd()
+            else:
+                print("syntax error : expected )")
 
     def exprprim(self):
         pass
