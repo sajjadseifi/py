@@ -10,10 +10,14 @@ class Node( object ):
 
 class ASTLp( Node ):
     def __init__(self):
+        self.label = "lp"
         super().__init__()
 
 class ASTStmt ( Node ):
-    def __init__(self):
+    def __init__(self,num):
+        self.label = "stmt"
+        self.num = num
+        self.children  = [num]
         super().__init__()
 
 #lp
@@ -28,4 +32,6 @@ class ASTLp1( ASTLp ):
         self.children = [stmt,lp]
         super().__init__()
 
-
+class ASTStmtPush( ASTStmt ):
+    def __init__(self,num):
+        super().__init__(num)
