@@ -2,8 +2,6 @@
 '''
     :: Lexer Level ::
 
-    iden := [A-Za-z_][A-Za-z_0-9]*
-
     num  := [0-9]+
     
     comment := --[^\n]*
@@ -14,14 +12,14 @@
         stmt lp
     
     stmt := |
-        PSH expr
-        PLS expr
-        MIN expr
-        MUL expr
-        DIV expr
-        PER expr
-        PRINT expr
+        keyw num
 
-    expr := iden |
-            num
+    keyw := 
+        PUSH    |
+        PLUS    |
+        MIN     |
+        MUL     |
+        DIV     |
+        PER     |
+        PRINT
 '''
