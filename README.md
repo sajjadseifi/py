@@ -4,11 +4,11 @@
     <li>
         <span>Complet</span>
         <span>:</span>
-        <span>Caclulator Interpreter</span>
+        <span>Caclulator Interpreter ( calc )</span>
     </li>
     <li>
         <span>Todo</span>
         <span>:</span>
-        <span>Caclulator IR Interpreter</span>
+        <span>Caclulator IR Interpreter( lifepath )</span>
     </li>
 </ul>
