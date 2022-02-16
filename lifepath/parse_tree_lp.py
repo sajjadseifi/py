@@ -20,7 +20,11 @@ class ParseTree:
     def __init__(self,lex : Lexer):
         self.lex = lex
 
+    def next(self): 
+        return self.lex.droptoken()
+    
     def lp(self):
         pass
+    
     def stmt(self):
         pass
