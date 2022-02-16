@@ -43,3 +43,7 @@ class ASTStmtPlus( ASTStmt ):
 class ASTStmtMin( ASTStmt ):
     def __init__(self,num):
         super().__init__(num)
+
+class ASTStmtMul( ASTStmt ):
+    def __init__(self,num):
+        super().__init__(num)
