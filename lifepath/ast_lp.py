@@ -55,3 +55,7 @@ class ASTStmtDiv( ASTStmt ):
 class ASTStmtPer( ASTStmt ):
     def __init__(self,num):
         super().__init__(num)
+
+class ASTStmtPrint( ASTStmt ):
+    def __init__(self,num):
+        super().__init__(num)
