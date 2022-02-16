@@ -31,4 +31,30 @@ class ParseTree:
         return AST.ASTLp1(self.stmt(),self.lp())
     
     def stmt(self):
-        pass
+        ast = None
+        key = self.next()
+        num = self.next()
+
+        if key == "PUSH":
+            ast =  AST.ASTStmtPush(num)
+        if key == "PLUS":
+            ast = AST.ASTStmtPlus(num)
+        if key == "MIN":
+            ast = AST.ASTStmtMin(num)
+        if key == "MUL":
+            ast = AST.ASTStmtMul(num)
+        if key == "DIV":
+            ast = AST.ASTStmtDiv(num)
+        if key == "PER":
+            ast = AST.ASTStmtPer(num)
+        if key == "PRINT":
+            ast = AST.ASTStmtPrint(num)
+        
+        if not ast:
+            print("syntax error : expected keyword [%s]" % key)
+            return None    
+
+        if not num.isnumeric():
+            print("syntax error : expected numeric token [%s]" % num)
+
+        return ast
