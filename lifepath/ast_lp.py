@@ -35,3 +35,7 @@ class ASTLp1( ASTLp ):
 class ASTStmtPush( ASTStmt ):
     def __init__(self,num):
         super().__init__(num)
+
+class ASTStmtPlus( ASTStmt ):
+    def __init__(self,num):
+        super().__init__(num)
