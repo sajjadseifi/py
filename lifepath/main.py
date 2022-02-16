@@ -13,17 +13,14 @@
     lp := |
         stmt lp
     
-    stmt := |
-        keyw num
-
-    keyw := 
-        PUSH    |
-        PLUS    |
-        MIN     |
-        MUL     |
-        DIV     |
-        PER     |
-        PRINT
+    stmt :=
+        PUSH num   |
+        PLUS num   |
+        MIN  num   |
+        MUL  num   |
+        DIV  num   |
+        PER  num   |
+        PRINT num
 '''
 
 from posixpath import abspath
