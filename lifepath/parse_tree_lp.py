@@ -14,6 +14,7 @@
 '''
 
 from lexer_lp import Lexer
+import ast_lp as AST
 
 
 class ParseTree:
@@ -24,7 +25,10 @@ class ParseTree:
         return self.lex.droptoken()
     
     def lp(self):
-        pass
+        if self.lex.eof():
+            return AST.ASTLp0()
+            
+        return AST.ASTLp1(self.stmt(),self.lp())
     
     def stmt(self):
         pass
