@@ -2,7 +2,7 @@
 
 IR Code Runner For Calculator
 
-# Lexer Grammar
+# Lexical Grammar
 ```
 
     iden := [A-Za-z_]+
