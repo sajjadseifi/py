@@ -31,8 +31,12 @@ class ParseTree:
         return AST.ASTLp1(self.stmt(),self.lp())
     
     def stmt(self):
-        ast = None
         key = self.next()
+        
+        if key == "PRINT":
+            return AST.ASTStmtPrint()
+        
+        ast = None
         num = self.next()
 
         if key == "PUSH":
@@ -47,9 +51,7 @@ class ParseTree:
             ast = AST.ASTStmtDiv(num)
         if key == "PER":
             ast = AST.ASTStmtPer(num)
-        if key == "PRINT":
-            ast = AST.ASTStmtPrint()
-        
+
         if not ast:
             print("syntax error : expected keyword [%s]" % key)
             return None    
