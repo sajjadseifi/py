@@ -20,7 +20,7 @@
         MUL  num   |
         DIV  num   |
         PER  num   |
-        PRINT num
+        PRINT
 '''
 
 from posixpath import abspath

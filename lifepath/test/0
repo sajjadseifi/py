@@ -2,4 +2,4 @@ PUSH 1
 MIN 2
 --division code
 DIV 10
-PRINT 0
+PRINT

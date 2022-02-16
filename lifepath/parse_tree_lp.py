@@ -48,7 +48,7 @@ class ParseTree:
         if key == "PER":
             ast = AST.ASTStmtPer(num)
         if key == "PRINT":
-            ast = AST.ASTStmtPrint(num)
+            ast = AST.ASTStmtPrint()
         
         if not ast:
             print("syntax error : expected keyword [%s]" % key)

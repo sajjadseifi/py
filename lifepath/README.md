@@ -25,5 +25,14 @@ IR Code Runner For Calculator
         MUL  num   |
         DIV  num   |
         PER  num   |
-        PRINT num
+        PRINT
+```
+
+# Code Example 
+```
+    PUSH 1
+    MIN 2
+    --division code
+    DIV 10
+    PRINT
 ```
