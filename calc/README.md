@@ -62,17 +62,17 @@ Interpreter Output :
 Compiler Output :
 ```
     PUSH 10
-    PUSH 10
-    PUSH 10
+    PUSH 5
+    PUSH 8
     PLUS
-    MOV 3 0
-    MOV 4 0
+    LD 0
+    LD 0
     MUL
-    MOV 1 2
-    MOV 4 2
-    MOV 5 1
+    ST 1
+    LD 2
+    LD 1
     PER
-    MOV 5 0
+    LD 0
     PLUS
     PRINT
 ```
