@@ -1,6 +1,14 @@
 # LifePath Interpreter 
 
-IR Code Runner For Calculator
+Description IR Code 
+```
+    PUSH (n) number push last of stack
+    PLUS replace 2 last element of stack with result of sum
+    MIN replace 2 last element of stack with result of mines
+    MULT replace 2 last element of stack with result of multipy
+    DIV replace 2 last element of stack with result of division
+    PRINT print of last element on stack
+```
 
 # Lexical Grammar
 ```
@@ -30,9 +38,12 @@ IR Code Runner For Calculator
 
 # Code Example 
 ```
-    PUSH 1
-    MIN 2
-    --division code
-    DIV 10
-    PRINT
+    PUSH 1 --[1]
+    PUSH 2 --[1,2]
+    PUSH 5 --[1,2,5]
+    MIN    --[1,-3]
+    PUSH 4 --[1,-3,4]
+    PUSH 2 --[1,-3,4,2]
+    DIV    --[1,-3,2]
+    PRINT  --2
 ```
