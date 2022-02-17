@@ -11,14 +11,22 @@ oprcode = {
     "%" :"PER",
 }
 
-curidxstk = -1
+class STK:
+    def __init__(self,c:int) -> None:
+        self.c = c
+    def up(self):
+        self.c +=1
+    def down(self):
+        self.c +=1
+
+stk = STK(0)
 
 def pushstk(num):
     print("PUSH",num)
-    curidxstk = curidxstk + 1
+    stk.up()
 
 def popstk():
-    curidxstk = curidxstk - 1
+    stk.down()
 
 def compiler(ast : AST.Node):
     if isinstance(ast,AST.ASTCalc):
@@ -29,7 +37,7 @@ def compiler(ast : AST.Node):
 def calc(ast : AST.Node):
     if len(ast.children):
         stmt(ast.first())
-        interpret(ast.children[1])
+        compiler(ast.children[1])
     
 def stmt(ast : AST.ASTStmt):
     if isinstance(ast,AST.ASTStmtExpr):
@@ -56,7 +64,7 @@ def expr(ast : AST.Node):
 def exprass(ast : AST.ASTExprAss):
     name = ast.iden.name
     expr(ast.expr)
-    symtbl.put(name,curidxstk)
+    symtbl.put(name,stk.c)
 
 def exprunary(ast : AST.ASTExprUnary):
     opr = ast.oprator
