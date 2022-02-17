@@ -61,7 +61,10 @@ def exprass(ast : AST.ASTExprAss):
 def exprunary(ast : AST.ASTExprUnary):
     opr = ast.oprator
     expr(ast.expr)
-    pushstk(opr + valget(ast))
+
+    pushstk(opr + 1)
+    print("MUL")
+    popstk()
 
 def exprcalc(ast : AST.ASTExprCacluate):
     #sub expersion
