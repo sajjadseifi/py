@@ -16,8 +16,9 @@ class IR:
         self.out.write("%s\n" % s)
     
     def push(self,num):
+        self.up()
         self.w("PUSH %s" % num)
-
+    
     def mov(self,tar,src):
         self.w("MOV %s %s" % (tar,src))
     
