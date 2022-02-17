@@ -30,6 +30,8 @@ def stmt(ast : AST.Node):
         stmtprint()
     if isinstance(ast,AST.ASTStmtPush):
         stmtpush(ast)
+    if isinstance(ast,AST.ASTStmtMov):
+        stmtmov(ast)
     if isinstance(ast,AST.ASTStmtPlus):
         stmtplus()
     if isinstance(ast,AST.ASTStmtMin):
@@ -50,6 +52,17 @@ def stmtprint():
 def stmtpush(ast : AST.ASTStmtPush):
     num = int(ast.num)
     stack.append(num)
+
+def stmtmov(ast : AST.ASTStmtMov):
+    if ast.tar < 0:
+        print("out of bounds target",ast.tar)
+    if ast.src < 0:
+        print("out of bounds source",ast.tar)
+    else:
+        stack[ast.tar] = stack[ast.src]
+        return
+
+    exit(1)
 
 def stmtplus():
     nums = get2num()
