@@ -2,13 +2,13 @@
 
 Description IR Code 
 ```
-    PUSH (n) number push last of stack
-    PLUS replace 2 last element of stack with result of sum
-    MIN replace 2 last element of stack with result of mines
-    MULT replace 2 last element of stack with result of multipy
-    DIV replace 2 last element of stack with result of division
-    PRINT print of last element on stack
-    MOV tar src set value of source index to target index
+    PUSH (n) : number push last of stack
+    PLUS : replace 2 last element of stack with result of sum
+    MIN : replace 2 last element of stack with result of mines
+    MULT : replace 2 last element of stack with result of multipy
+    DIV : replace 2 last element of stack with result of division
+    PRINT : print of last element on stack
+    MOV (tar) (src) : set value of source index to target index
 ```
 
 # Lexical Grammar
