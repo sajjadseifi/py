@@ -1,0 +1,9 @@
+PUSH 1
+PUSH 2
+PUSH 5
+MIN 
+PUSH 4
+--division code
+PUSH 2
+DIV
+PRINT
