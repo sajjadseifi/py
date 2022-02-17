@@ -1,6 +1,8 @@
+import math
 import ast_calc as AST
 from value_calc import valget, valset
 from symbols_calc import Symbols 
+
 #semantic
 symtbl = Symbols()
 
@@ -33,7 +35,7 @@ def expr(ast : AST.Node):
     elif isinstance(ast,AST.ASTExprCacluate):
         exprcalc(ast)    
     elif isinstance(ast,AST.ASTExprCall):
-        exprmath(ast)    
+        exprbuiltin(ast)    
     elif isinstance(ast,AST.ASTNum) or isinstance(ast,AST.ASTIden):
         exprprim(ast)    
 
@@ -82,27 +84,31 @@ def exprcalc(ast : AST.ASTExprCacluate):
 
     valset(ast,val)
 
-def exprmath(ast : AST.ASTExprCall):
+def exprbuiltin(ast : AST.ASTExprCall):
     #call math function
-    math = ast.iden.name
+    blt = ast.iden.name
     #radian value
     expr(ast.expr)
     val = valget(ast.expr)
 
     upval = val
 
-    if math == "rad":
-        upval = 1
-    elif math == "cot":
-        upval = 2
-    elif math == "tan":
-        upval = 3
-    elif math == "sin":
-        upval = 4
-    elif math == "cos":
-        upval = 5
+    if blt == "sqr":
+        upval = math.pow(val,2)
+    if blt == "rad":
+        upval = math.sqrt(val)
+    elif blt == "cot":
+        upval = math.tan(val)
+    elif blt == "tan":
+        upval = 1 / math.tan(val)
+    elif blt == "sin":
+        upval = math.sin(val)
+    elif blt == "cos":
+        upval = math.cos(val)
+    elif blt == "abs":
+        upval = abs(val)
 
-    print("call -> %s(%s)" %(math,upval))
+    print("call -> %s(%s)" %(blt,upval))
     
     valset(ast,upval) 
 
