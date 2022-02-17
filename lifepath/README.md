@@ -1,6 +1,7 @@
 # LifePath Interpreter 
 
 <h2>Description IR Code</h2>
+
 ```
     PUSH (n) : number push last of stack
     PLUS : replace 2 last element of stack with result of sum
@@ -12,6 +13,7 @@
 ```
 
 <h2>Lexical Grammar</h2>
+
 ```
     iden := [A-Za-z_]+
 
@@ -19,7 +21,9 @@
     
     comment := --[^\n]*
 ```
+
 <h2>Parser Grammar</h2>
+
 ```
     lp := |
         stmt lp
@@ -36,6 +40,7 @@
 ```
 
 <h2>Code Example</h2>
+
 ```
     PUSH 1 --[1]
     PUSH 2 --[1,2]
