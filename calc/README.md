@@ -41,6 +41,7 @@ Example Code :
 ```
     a = 10
     b = (10 + 10)
+    b = a * a
     c = rad:b
     print c % b + a
 ```
@@ -49,11 +50,13 @@ Interpreter Output :
     assign -> a = 10
     calculate -> 20 = 10 + 10
     assign -> b = 20
-    call -> rad(1)
-    assign -> c = 1
-    calculate -> 1 = 1 % 20
-    calculate -> 11 = 1 + 10
-    print -> 11
+    calculate -> 100 = 10 * 10
+    assign -> b = 100
+    call -> rad(10.0)
+    assign -> c = 10.0
+    calculate -> 10 = 10 % 100
+    calculate -> 20 = 10 + 10
+    print -> 20
 ```
 
 Compiler Output :
