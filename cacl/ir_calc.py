@@ -3,6 +3,11 @@ class IR:
         self.idxstk = 0
         self.out = open(path,"w+")
 
+    def up(self):
+        self.idxstk +=1
+    def down(self):
+        self.idxstk -=1
+
     def w(self,s:str):
         self.out.write(s)
     
