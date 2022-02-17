@@ -19,7 +19,7 @@ if len(sys.argv) > 2:
     if conf == "-i":
         interpret(ast)
     if conf == "-c":
-        path = "a.out"
+        path = "build/a.out"
         if len(sys.argv) > 3:
             path = sys.argv[3]
 
