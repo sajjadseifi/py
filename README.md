@@ -7,7 +7,7 @@
         <span>Caclulator Interpreter ( calc )</span>
     </li>
     <li>
-        <span>Todo</span>
+        <span>Complet</span>
         <span>:</span>
         <span>Caclulator IR Interpreter( lifepath )</span>
     </li>
