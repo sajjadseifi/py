@@ -2,6 +2,11 @@ import ast_lp as AST
 from lifepath.value_lp import numget
 
 stack = list()
+def get2num():
+    n1 = stack.pop()
+    n2 = stack.pop()
+
+    return (n1,n2) 
 
 def interpreter(ast : AST.Node):
     if isinstance(ast,AST.ASTLp):
@@ -20,7 +25,7 @@ def stmt(ast : AST.Node):
     if isinstance(ast,AST.ASTStmtPlus):
         stmtplus()
     if isinstance(ast,AST.ASTStmtMin):
-        pass
+        stmtmin()
     if isinstance(ast,AST.ASTStmtMul):
         pass
     if isinstance(ast,AST.ASTStmtDiv):
@@ -35,9 +40,11 @@ def stmtpush(ast : AST.ASTStmtPush):
     stack.append(num)
 
 def stmtplus():
-    num1 = stack.pop()
-    num2 = stack.pop()
+    nums = get2num()
 
-    sum = num2 + num1
+    stack.append(nums[0] + nums[1])
 
-    stack.append(sum)
+def stmtmin():
+    nums = get2num()
+
+    stack.append(nums[0] - nums[1])
