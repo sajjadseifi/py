@@ -2,7 +2,8 @@ class IR:
     def __init__(self,path) -> None:
         self.idxstk = 0
         self.out = open(path,"w+")
-
+        self.out.flush()
+        
     def up(self):
         self.idxstk +=1
     def down(self):
