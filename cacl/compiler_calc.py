@@ -3,6 +3,22 @@ from value_calc import valget, valset
 from symbols_calc import Symbols 
 #semantic
 symtbl = Symbols()
+oprcode = {
+    "+" :"PLUS",
+    "-" :"MIN",
+    "*" :"MUL",
+    "/" :"DIV",
+    "%" :"PER",
+}
+
+curidxstk = 0
+
+def pushstk(num):
+    print("PUSH",num)
+    curidxstk = curidxstk + 1
+
+def popstk():
+    curidxstk = curidxstk - 1
 
 def interpret(ast : AST.Node):
     if isinstance(ast,AST.ASTCalc):
@@ -40,18 +56,21 @@ def expr(ast : AST.Node):
 def exprass(ast : AST.ASTExprAss):
     name = ast.iden.name
     expr(ast.expr)
-    val = valget(ast.expr)
-    symtbl.put(name,val)
-    valset(ast,val)
+    symtbl.put(name,0)
 
 def exprunary(ast : AST.ASTExprUnary):
     opr = ast.oprator
     expr(ast.expr)
 
-    print("PUSH %s%s" % (opr,valget(ast)))
+    pushstk(opr + valget(ast))
 
 def exprcalc(ast : AST.ASTExprCacluate):
-    pass
+    #sub expersion
+    expr(ast.left)
+    expr(ast.right)
+    #print
+    print(oprcode.get(ast.oprator))
+    popstk()
 
 def exprmath(ast : AST.ASTExprCall):
     pass
