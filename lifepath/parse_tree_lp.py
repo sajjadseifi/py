@@ -25,6 +25,18 @@ class ParseTree:
             ast =  AST.ASTStmtPush(num)
             if not num.isnumeric():
                 print("syntax error : expected numeric token [%s]" % num)
+        
+        if key == "MOV":
+            tar = self.next()
+            if not tar.isnumeric():
+                print("syntax error : expected numeric token [%s]" % num)
+        
+            src = self.next()
+            if not src.isnumeric():
+                print("syntax error : expected numeric token [%s]" % num)
+        
+            ast = AST.ASTStmtMov(tar,src)
+
         if key == "PRINT":
             ast = AST.ASTStmtPrint()
         if key == "PLUS":
