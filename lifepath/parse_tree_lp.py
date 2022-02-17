@@ -24,6 +24,9 @@ class ParseTree:
     def next(self): 
         return self.lex.droptoken()
     
+    def parse(self):
+        self.lp()
+
     def lp(self):
         if self.lex.eof():
             return AST.ASTLp0()
