@@ -19,12 +19,12 @@ IR Code Runner For Calculator
         stmt lp
     
     stmt :=
-        PUSH num   |
-        PLUS num   |
-        MIN  num   |
-        MUL  num   |
-        DIV  num   |
-        PER  num   |
+        PUSH num    |
+        PLUS        |
+        MIN         |
+        MUL         |
+        DIV         |
+        PER         |
         PRINT
 ```
 

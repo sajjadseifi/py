@@ -4,13 +4,13 @@
         stmt lp
     
     stmt :=
-        PUSH num   |
-        PLUS num   |
-        MIN  num   |
-        MUL  num   |
-        DIV  num   |
-        PER  num   |
-        PRINT num
+        PUSH num    |
+        PLUS        |
+        MIN         |
+        MUL         |
+        DIV         |
+        PER         |
+        PRINT
 '''
 
 from lexer_lp import Lexer
@@ -32,31 +32,27 @@ class ParseTree:
     
     def stmt(self):
         key = self.next()
-        
-        if key == "PRINT":
-            return AST.ASTStmtPrint()
-        
-        ast = None
-        num = self.next()
-
+        ast =  None        
         if key == "PUSH":
+            num = self.next()
             ast =  AST.ASTStmtPush(num)
+            if not num.isnumeric():
+                print("syntax error : expected numeric token [%s]" % num)
+        if key == "PRINT":
+            ast = AST.ASTStmtPrint()
         if key == "PLUS":
-            ast = AST.ASTStmtPlus(num)
+            ast = AST.ASTStmtPlus()
         if key == "MIN":
-            ast = AST.ASTStmtMin(num)
+            ast = AST.ASTStmtMin()
         if key == "MUL":
-            ast = AST.ASTStmtMul(num)
+            ast = AST.ASTStmtMul()
         if key == "DIV":
-            ast = AST.ASTStmtDiv(num)
+            ast = AST.ASTStmtDiv()
         if key == "PER":
-            ast = AST.ASTStmtPer(num)
+            ast = AST.ASTStmtPer()
 
         if not ast:
             print("syntax error : expected keyword [%s]" % key)
             return None    
-
-        if not num.isnumeric():
-            print("syntax error : expected numeric token [%s]" % num)
 
         return ast
