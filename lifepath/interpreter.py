@@ -18,7 +18,7 @@ def stmt(ast : AST.Node):
     if isinstance(ast,AST.ASTStmtPush):
         stmtpush(ast)
     if isinstance(ast,AST.ASTStmtPlus):
-        pass
+        stmtplus()
     if isinstance(ast,AST.ASTStmtMin):
         pass
     if isinstance(ast,AST.ASTStmtMul):
@@ -31,5 +31,13 @@ def stmt(ast : AST.Node):
         pass
 
 def stmtpush(ast : AST.ASTStmtPush):
-    num = numget(ast) 
+    num = int(ast.num)
     stack.append(num)
+
+def stmtplus():
+    num1 = stack.pop()
+    num2 = stack.pop()
+
+    sum = num2 + num1
+
+    stack.append(sum)
