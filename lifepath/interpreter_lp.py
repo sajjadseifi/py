@@ -2,6 +2,10 @@ import ast_lp as AST
 
 stack = list()
 def get2num():
+    if len(stack) < 2:
+        print("stack size not enouf size for calculate")
+        exit(1)
+
     n1 = stack.pop()
     n2 = stack.pop()
 
