@@ -76,4 +76,9 @@ def exprmath(ast : AST.ASTExprCall):
     pass
 
 def exprprim(ast : AST.Node):
-    pass
+    if isinstance(ast,AST.ASTNum):
+        pushstk(ast.num)
+    elif isinstance(ast,AST.ASTIden):
+        name = ast.name
+        idx  = symtbl.get(name)
+        print("MOV",idx)
