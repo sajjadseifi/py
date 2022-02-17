@@ -29,7 +29,7 @@ def stmt(ast : AST.Node):
     if isinstance(ast,AST.ASTStmtMul):
         stmtmul()
     if isinstance(ast,AST.ASTStmtDiv):
-        pass
+        stmtdiv()
     if isinstance(ast,AST.ASTStmtPer):
         pass
     if isinstance(ast,AST.ASTStmtPrint):
@@ -49,8 +49,12 @@ def stmtmin():
 
     stack.append(nums[0] - nums[1])
 
-
 def stmtmul():
     nums = get2num()
 
     stack.append(nums[0] * nums[1])
+
+def stmtdiv():
+    nums = get2num()
+
+    stack.append(nums[0] / nums[1])
