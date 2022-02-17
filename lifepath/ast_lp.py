@@ -43,6 +43,12 @@ class ASTStmtMov( ASTStmt ):
         self.children  = [tar,src]
         super().__init__()
 
+class ASTStmtMovld( ASTStmt ):
+    def __init__(self,src):
+        self.src = src
+        self.children  = [src]
+        super().__init__()
+
 class ASTStmtPlus( ASTStmt ):
     def __init__(self):
         super().__init__()
