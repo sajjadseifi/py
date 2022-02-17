@@ -21,6 +21,8 @@ def stmt(ast : AST.Node):
         stmtpush(ast)
     if isinstance(ast,AST.ASTStmtMov):
         stmtmov(ast)
+    if isinstance(ast,AST.ASTStmtMovld):
+        stmtmovld(ast)
     if isinstance(ast,AST.ASTStmtPlus):
         stmtplus()
     if isinstance(ast,AST.ASTStmtMin):
@@ -50,12 +52,16 @@ def stmtmov(ast : AST.ASTStmtMov):
         print("out of bounds target",tar)
     if src < 0 or src >= stklp.size:
         print("out of bounds source",tar)
-    else:
-        ldnum = stklp.get(src)
-        stklp.set(tar,ldnum);
-        return
+    if src >= tar :
+        print("source position must less than target position",tar)
+    
+    ldnum = stklp.get(src)
+    stklp.set(tar,ldnum);
 
-    exit(1)
+
+def stmtmovld(ast : AST.ASTStmtMov):
+    src = int(ast.src)
+    stklp.push(src)
 
 def stmtplus():
     nums = stklp.popn(2)
