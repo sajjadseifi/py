@@ -44,6 +44,7 @@
 <h2>Code Example</h2>
 
 ```
+    PUSH 7  --[7]
     PUSH 3  --[7, 3]
     PUSH 8  --[7, 3, 8]
     PLUS    --[7, 11]
