@@ -31,7 +31,7 @@
     stmt :=
         PUSH num    |
         MOV num     |
-        MOV num num |
+        SET num     |
         PLUS        |
         MIN         |
         MUL         |
@@ -49,7 +49,7 @@
     MOV 0
     MOV 0
     MUL
-    MOV 1 2
+    SET 1
     MOV 2
     MOV 1
     PER
