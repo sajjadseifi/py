@@ -30,12 +30,14 @@ class ParseTree:
             tar = self.next()
             if not tar.isnumeric():
                 print("syntax error : expected numeric token [%s]" % num)
-        
-            src = self.next()
-            if not src.isnumeric():
-                print("syntax error : expected numeric token [%s]" % num)
-        
-            ast = AST.ASTStmtMov(tar,src)
+            
+            src = self.lex.gettoken()
+
+            if src.isnumeric():    
+                self.next()
+                ast = AST.ASTStmtMov(tar,src)
+            else:
+                ast = AST.ASTStmtMovld(src)
 
         if key == "PRINT":
             ast = AST.ASTStmtPrint()
