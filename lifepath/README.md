@@ -44,17 +44,18 @@
 <h2>Code Example</h2>
 
 ```
-    PUSH 5
-    PUSH 8
-    PLUS
-    MOV 0
-    MOV 0
-    MUL
-    SET 1
-    MOV 2
-    MOV 1
-    PER
-    MOV 0
-    PLUS
-    PRINT
+    PUSH 10 --[10]
+    PUSH 5  --[10, 5]
+    PUSH 8  --[10, 5, 8]
+    PLUS    --[10, 13]
+    LD 0    --[10, 13, 10]
+    LD 0    --[10, 13, 10, 10]
+    MUL     --[10, 13, 100]
+    ST 1    --[10, 100]
+    LD 2    --[10, 100, 100]
+    LD 1    --[10, 100, 100, 100]
+    PER     --[10, 100, 0]
+    LD 0    --[10, 100, 0, 10]
+    PLUS    --[10, 100, 10]
+    PRINT   --10 (last element)
 ```
