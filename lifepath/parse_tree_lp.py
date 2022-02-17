@@ -22,34 +22,30 @@ class ParseTree:
         ast =  None        
         if key == "PUSH":
             num = self.next()
-            ast =  AST.ASTStmtPush(num)
             if not num.isnumeric():
                 print("syntax error : expected numeric token [%s]" % num)
-        
+            ast =  AST.ASTStmtPush(num)
         if key == "MOV":
-            tar = self.next()
-            if not tar.isnumeric():
+            src = self.next()
+            if not src.isnumeric():
                 print("syntax error : expected numeric token [%s]" % num)
-            
-            src = self.lex.gettoken()
-
-            if src.isnumeric():    
-                self.next()
-                ast = AST.ASTStmtMov(tar,src)
-            else:
-                ast = AST.ASTStmtMovld(src)
-
-        if key == "PRINT":
+            ast = AST.ASTStmtMov(src)
+        elif key == "SET":
+            src = self.next()
+            if not src.isnumeric():
+                print("syntax error : expected numeric token [%s]" % num)     
+            ast = AST.ASTStmtSet(src)
+        elif key == "PRINT":
             ast = AST.ASTStmtPrint()
-        if key == "PLUS":
+        elif key == "PLUS":
             ast = AST.ASTStmtPlus()
-        if key == "MIN":
+        elif key == "MIN":
             ast = AST.ASTStmtMin()
-        if key == "MUL":
+        elif key == "MUL":
             ast = AST.ASTStmtMul()
-        if key == "DIV":
+        elif key == "DIV":
             ast = AST.ASTStmtDiv()
-        if key == "PER":
+        elif key == "PER":
             ast = AST.ASTStmtPer()
 
         if not ast:
