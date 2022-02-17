@@ -25,8 +25,12 @@
 
 from posixpath import abspath
 from lexer_lp import Lexer
-from test_lp import test_lexer
+from interpreter_lp import interpreter
+from parse_tree_lp import ParseTree
 
 addr = abspath("./test/0")
 lex = Lexer(addr)
-test_lexer(lex)
+p3 = ParseTree(lex)
+ast = p3.parse()
+print(ast)
+interpreter(ast)
