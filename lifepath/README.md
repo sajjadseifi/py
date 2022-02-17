@@ -1,6 +1,6 @@
 # LifePath Interpreter 
 
-Description IR Code 
+<h2>Description IR Code</h2>
 ```
     PUSH (n) : number push last of stack
     PLUS : replace 2 last element of stack with result of sum
@@ -11,18 +11,15 @@ Description IR Code
     MOV (tar) (src) : set value of source index to target index
 ```
 
-# Lexical Grammar
+<h2>Lexical Grammar</h2>
 ```
-
     iden := [A-Za-z_]+
 
     num  := [0-9]+
     
     comment := --[^\n]*
-
 ```
-
-# Parser Grammar
+<h2>Parser Grammar</h2>
 ```
     lp := |
         stmt lp
@@ -38,7 +35,7 @@ Description IR Code
         PRINT
 ```
 
-# Code Example 
+<h2>Code Example</h2>
 ```
     PUSH 1 --[1]
     PUSH 2 --[1,2]
