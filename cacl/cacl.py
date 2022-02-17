@@ -43,11 +43,20 @@ from lexer_calc import Lexer
 from parser_tree_calc import ParserTree
 from pre_parser_calc import pre_parse
 from interpreter import interpret
+from compiler_calc import compiler
+import sys
 
-faddr = "./test/0"
-addr = abspath(faddr)
-lex = Lexer(addr)
-pars = ParserTree(lex)
-ast = pars.parse()
-pre_parse(ast)
-interpret(ast)
+if len(sys.argv) > 2:
+    conf = sys.argv[1]
+    path = sys.argv[2]
+    addr = abspath(path)
+    lex = Lexer(addr)
+    pars = ParserTree(lex)
+    ast = pars.parse()
+    pre_parse(ast)
+    if conf == "-i":
+        interpret(ast)
+    if conf == "-c":
+        compiler(ast)
+else:
+    print("please enter -config path")
