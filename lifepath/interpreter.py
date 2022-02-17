@@ -33,7 +33,8 @@ def stmt(ast : AST.Node):
     if isinstance(ast,AST.ASTStmtPer):
         stmtper()
     if isinstance(ast,AST.ASTStmtPrint):
-        pass
+        num = stack.pop()
+        print(num)
 
 def stmtpush(ast : AST.ASTStmtPush):
     num = int(ast.num)
