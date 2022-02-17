@@ -9,7 +9,7 @@ class IR:
         self.idxstk -=1
 
     def w(self,s:str):
-        self.out.write(s)
+        self.out.write("%s\n" % s)
     
     def push(self,num):
         self.w("PUSH %s" % num)
