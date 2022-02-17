@@ -45,7 +45,10 @@ def exprass(ast : AST.ASTExprAss):
     valset(ast,val)
 
 def exprunary(ast : AST.ASTExprUnary):
-    pass
+    opr = ast.oprator
+    expr(ast.expr)
+
+    print("PUSH %s%s" % (opr,valget(ast)))
 
 def exprcalc(ast : AST.ASTExprCacluate):
     pass
