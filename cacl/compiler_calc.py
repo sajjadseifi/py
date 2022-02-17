@@ -47,10 +47,12 @@ def exprass(ir:IR,ast : AST.ASTExprAss):
     
     idx = symtbl.get(name)
 
+    last = ir.idxstk - 1
     if idx:
-        ir.mov(idx,ir.idxstk)
+        ir.mov(idx,last)
     else:
-        symtbl.put(name,ir.idxstk)
+        print(name,last)
+        symtbl.put(name,last)
 
 def exprunary(ir:IR,ast : AST.ASTExprUnary):
     opr = ast.oprator
