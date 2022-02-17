@@ -14,10 +14,8 @@ class ASTLp( Node ):
         super().__init__()
 
 class ASTStmt ( Node ):
-    def __init__(self,num):
+    def __init__(self):
         self.label = "stmt"
-        self.num = num
-        self.children  = [num]
         super().__init__()
 
 #lp
@@ -34,28 +32,30 @@ class ASTLp1( ASTLp ):
 
 class ASTStmtPush( ASTStmt ):
     def __init__(self,num):
-        super().__init__(num)
+        self.num = num
+        self.children  = [num]
+        super().__init__()
 
 class ASTStmtPlus( ASTStmt ):
-    def __init__(self,num):
-        super().__init__(num)
+    def __init__(self):
+        super().__init__()
 
 class ASTStmtMin( ASTStmt ):
-    def __init__(self,num):
-        super().__init__(num)
+    def __init__(self):
+        super().__init__()
 
 class ASTStmtMul( ASTStmt ):
-    def __init__(self,num):
-        super().__init__(num)
+    def __init__(self):
+        super().__init__()
 
 class ASTStmtDiv( ASTStmt ):
-    def __init__(self,num):
-        super().__init__(num)
+    def __init__(self):
+        super().__init__()
 
 class ASTStmtPer( ASTStmt ):
-    def __init__(self,num):
-        super().__init__(num)
+    def __init__(self):
+        super().__init__()
 
 class ASTStmtPrint( ASTStmt ):
     def __init__(self):
-        super().__init__(None)
+        super().__init__()
