@@ -24,18 +24,24 @@ class IR:
     
     def print(self):
         self.w("PRINT")
+        self.down()
     
     def plus(self):
         self.w("PLUS")
+        self.down()
     
     def min(self):
         self.w("MIN")
+        self.down()
     
     def div(self):
         self.w("DIV")
+        self.down()
     
     def mul(self):
         self.w("MUL")
+        self.down()
     
     def per(self):
         self.w("PER")
+        self.down()

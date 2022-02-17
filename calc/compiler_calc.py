@@ -60,7 +60,6 @@ def exprunary(ir:IR,ast : AST.ASTExprUnary):
 
     ir.push(opr + 1)
     ir.mul()
-    ir.down()
 
 def exprcalc(ir:IR,ast : AST.ASTExprCacluate):
     #sub expersion
@@ -81,8 +80,6 @@ def exprcalc(ir:IR,ast : AST.ASTExprCacluate):
     if op == "%":
         ir.per()
 
-    ir.down()
-
 def exprmath(ir:IR,ast : AST.ASTExprCall):
     pass
 
@@ -95,4 +92,5 @@ def exprprim(ir:IR,ast : AST.Node):
         idx  = symtbl.get(name)
         if isinstance(idx,int) and idx > -1:
             ir.up()
-            ir.mov(ir.idxstk,idx)
+            last = ir.idxstk - 1
+            ir.mov(last,idx)
