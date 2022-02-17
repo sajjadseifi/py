@@ -1,5 +1,4 @@
 import ast_lp as AST
-from lifepath.value_lp import numget
 
 stack = list()
 def get2num():
@@ -20,6 +19,7 @@ def lp(ast : AST.Node):
         interpreter(ast.children[1])
 
 def stmt(ast : AST.Node):
+    print("start",stack)
     if isinstance(ast,AST.ASTStmtPrint):
         stmtprint()
     if isinstance(ast,AST.ASTStmtPush):
@@ -34,6 +34,7 @@ def stmt(ast : AST.Node):
         stmtdiv()
     if isinstance(ast,AST.ASTStmtPer):
         stmtper()
+    print("end",stack)
 
 def stmtprint():
     num = stack.pop()
