@@ -1,21 +1,5 @@
-#Grammar Parser
-'''
-    lp := |
-        stmt lp
-    
-    stmt :=
-        PUSH num    |
-        PLUS        |
-        MIN         |
-        MUL         |
-        DIV         |
-        PER         |
-        PRINT
-'''
-
 from lexer_lp import Lexer
 import ast_lp as AST
-
 
 class ParseTree:
     def __init__(self,lex : Lexer):

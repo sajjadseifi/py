@@ -1,13 +1,3 @@
-'''
-    :: Lexer Level ::
-
-    iden := [A-Za-z_]+
-
-    num  := [0-9]+
-    
-    comment := --[^\n]*
-'''
-
 class Lexer:
     def __init__(self, file):
         self.file = open(file,'r')
