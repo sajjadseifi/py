@@ -25,7 +25,7 @@ class ParseTree:
         return self.lex.droptoken()
     
     def parse(self):
-        self.lp()
+       return self.lp()
 
     def lp(self):
         if self.lex.eof():
