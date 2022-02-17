@@ -25,16 +25,16 @@ class ParseTree:
             if not num.isnumeric():
                 print("syntax error : expected numeric token [%s]" % num)
             ast =  AST.ASTStmtPush(num)
-        if key == "MOV":
+        if key == "LD":
             src = self.next()
             if not src.isnumeric():
                 print("syntax error : expected numeric token [%s]" % num)
-            ast = AST.ASTStmtMov(src)
-        elif key == "SET":
+            ast = AST.ASTStmtLoad(src)
+        elif key == "ST":
             src = self.next()
             if not src.isnumeric():
                 print("syntax error : expected numeric token [%s]" % num)     
-            ast = AST.ASTStmtSet(src)
+            ast = AST.ASTStmtStore(src)
         elif key == "PRINT":
             ast = AST.ASTStmtPrint()
         elif key == "PLUS":
