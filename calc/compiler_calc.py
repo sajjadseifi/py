@@ -92,5 +92,4 @@ def exprprim(ir:IR,ast : AST.Node):
         idx  = symtbl.get(name)
         if isinstance(idx,int) and idx > -1:
             ir.up()
-            last = ir.idxstk - 1
-            ir.mov(last,idx)
+            ir.movld(idx)

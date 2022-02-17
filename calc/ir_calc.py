@@ -22,6 +22,9 @@ class IR:
     def mov(self,tar,src):
         self.w("MOV %s %s" % (tar,src))
     
+    def movld(self,src):
+        self.w("MOV %s" % (src))
+    
     def print(self):
         self.w("PRINT")
         self.down()
