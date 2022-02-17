@@ -25,6 +25,29 @@ def stmt(ast : AST.ASTStmt):
     else:
         print("ast error: this ast is not stmt");
 
-
 def expr(ast : AST.Node):
+    if isinstance(ast,AST.ASTExprAss):
+        exprass(ast)    
+    elif isinstance(ast,AST.ASTExprUnary):
+        exprunary(ast)    
+    elif isinstance(ast,AST.ASTExprCacluate):
+        exprcalc(ast)    
+    elif isinstance(ast,AST.ASTExprCall):
+        exprmath(ast)    
+    elif isinstance(ast,AST.ASTNum) or isinstance(ast,AST.ASTIden):
+        exprprim(ast)    
+
+def exprass(ast : AST.ASTExprAss):
+    pass
+
+def exprunary(ast : AST.ASTExprUnary):
+    pass
+
+def exprcalc(ast : AST.ASTExprCacluate):
+    pass
+
+def exprmath(ast : AST.ASTExprCall):
+    pass
+
+def exprprim(ast : AST.Node):
     pass
