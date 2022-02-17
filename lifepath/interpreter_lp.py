@@ -6,10 +6,13 @@ def get2num():
         print("stack size not enouf size for calculate")
         exit(1)
 
-    n1 = stack.pop()
-    n2 = stack.pop()
+    r = stack.pop()
+    l = stack.pop()
 
-    return (n1,n2) 
+    return (l,r) 
+
+def setnum(num):
+    stack.append(int(num))
 
 def interpreter(ast : AST.Node):
     if isinstance(ast,AST.ASTLp):
@@ -17,13 +20,12 @@ def interpreter(ast : AST.Node):
     else:
         print("ast error: please entered root ast LP");
 
-def lp(ast : AST.Node):
-    if len(ast.children):
-        stmt(ast.first())
-        interpreter(ast.children[1])
+def lp(ast : AST.ASTLp):
+    if isinstance(ast,AST.ASTLp1):
+        stmt(ast.stmt)
+        interpreter(ast.lp)
 
 def stmt(ast : AST.Node):
-    print("start",stack)
     if isinstance(ast,AST.ASTStmtPrint):
         stmtprint()
     if isinstance(ast,AST.ASTStmtPush):
@@ -38,7 +40,8 @@ def stmt(ast : AST.Node):
         stmtdiv()
     if isinstance(ast,AST.ASTStmtPer):
         stmtper()
-    print("end",stack)
+
+    print(stack)
 
 def stmtprint():
     num = stack.pop()
@@ -50,20 +53,20 @@ def stmtpush(ast : AST.ASTStmtPush):
 
 def stmtplus():
     nums = get2num()
-    stack.append(nums[0] + nums[1])
+    setnum(nums[0] + nums[1])
 
 def stmtmin():
     nums = get2num()
-    stack.append(nums[0] - nums[1])
+    setnum(nums[0] - nums[1])
 
 def stmtmul():
     nums = get2num()
-    stack.append(nums[0] * nums[1])
+    setnum(nums[0] * nums[1])
 
 def stmtdiv():
     nums = get2num()
-    stack.append(nums[0] / nums[1])
+    setnum(nums[0] / nums[1])
 
 def stmtper():
     nums = get2num()
-    stack.append(nums[0] % nums[1])
+    setnum(nums[0] % nums[1])
