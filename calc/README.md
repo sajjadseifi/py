@@ -3,7 +3,7 @@
 Lexical : 
 ```
         
-    token :=    + |
+    oprator :=    + |
                 - |
                 * |
                 / |
