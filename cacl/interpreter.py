@@ -44,7 +44,7 @@ def exprass(ast : AST.ASTExprAss):
     symtbl.put(name,val)
     valset(ast,val)
 
-    print("ass -> %s = %s" % (name,val))
+    print("assign -> %s = %s" % (name,val))
 
 def exprunary(ast : AST.ASTExprUnary):
     opr = ast.oprator
@@ -71,7 +71,7 @@ def exprcalc(ast : AST.ASTExprCacluate):
     elif opr == "%":
         val = valget(ast.left) % valget(ast.right)
 
-    print("calc -> %s = %s %s %s" %
+    print("calculate -> %s = %s %s %s" %
         (
             val,
             valget(ast.left),

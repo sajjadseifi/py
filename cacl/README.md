@@ -46,13 +46,13 @@ Example Code :
 ```
 Interpreter Output :
 ```
-    ass -> a = 10
-    calc -> 20 = 10 + 10
-    ass -> b = 20
+    assign -> a = 10
+    calculate -> 20 = 10 + 10
+    assign -> b = 20
     call -> rad(1)
-    ass -> c = 1
-    calc -> 1 = 1 % 20
-    calc -> 11 = 1 + 10
+    assign -> c = 1
+    calculate -> 1 = 1 % 20
+    calculate -> 11 = 1 + 10
     print -> 11
 ```
 
