@@ -77,7 +77,10 @@ class Lexer:
 
         while(c != '\n'):
             c = self.nextch()
-
+       
+        if(c != ''):
+            self.seekprev()
+        
     def iden(self):
         c = self.nextch()   
         if not c.isalpha():

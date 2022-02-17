@@ -26,8 +26,10 @@ class Lexer:
     def droptoken(self):
         chunk = self.nextch()
         self.seekprev()
-        
-        if chunk.isspace():
+
+        if chunk == '':
+            return None
+        elif chunk.isspace():
             self.whitespace()
             return self.droptoken()
 
@@ -44,9 +46,6 @@ class Lexer:
 
         elif chunk.isnumeric():
             return self.num()
-
-        elif chunk == '':
-            return None
         else:
             self.seeknext()
             print("lexical error : near token '%s'" % chunk)
@@ -54,11 +53,13 @@ class Lexer:
 
     def whitespace(self):
         c = self.nextch()
-        while(c .isspace()):
+
+        while(c.isspace()):
             c = self.nextch()
 
-        self.seekprev()
-
+        if(c != ''):
+            self.seekprev()
+        
     def comment(self):
         while(self.nextch() != '\n'):
             pass
