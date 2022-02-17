@@ -11,7 +11,7 @@ oprcode = {
     "%" :"PER",
 }
 
-curidxstk = 0
+curidxstk = -1
 
 def pushstk(num):
     print("PUSH",num)
@@ -56,12 +56,11 @@ def expr(ast : AST.Node):
 def exprass(ast : AST.ASTExprAss):
     name = ast.iden.name
     expr(ast.expr)
-    symtbl.put(name,0)
+    symtbl.put(name,curidxstk)
 
 def exprunary(ast : AST.ASTExprUnary):
     opr = ast.oprator
     expr(ast.expr)
-
     pushstk(opr + valget(ast))
 
 def exprcalc(ast : AST.ASTExprCacluate):
