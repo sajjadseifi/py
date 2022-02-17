@@ -1,5 +1,9 @@
 PUSH 1
-MIN 2
+PUSH 2
+PUSH 5
+MIN 
+PUSH 4
 --division code
-DIV 10
+PUSH 6
+DIV
 PRINT
