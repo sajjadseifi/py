@@ -37,10 +37,9 @@ class ASTStmtPush( ASTStmt ):
         super().__init__()
 
 class ASTStmtLoad( ASTStmt ):
-    def __init__(self,tar,src):
-        self.tar = tar
+    def __init__(self,src):
         self.src = src
-        self.children  = [tar,src]
+        self.children  = [src]
         super().__init__()
 
 class ASTStmtStore( ASTStmt ):
