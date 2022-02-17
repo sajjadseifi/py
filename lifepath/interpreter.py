@@ -20,6 +20,8 @@ def lp(ast : AST.Node):
         interpreter(ast.children[1])
 
 def stmt(ast : AST.Node):
+    if isinstance(ast,AST.ASTStmtPrint):
+        stmtprint()
     if isinstance(ast,AST.ASTStmtPush):
         stmtpush(ast)
     if isinstance(ast,AST.ASTStmtPlus):
@@ -32,9 +34,10 @@ def stmt(ast : AST.Node):
         stmtdiv()
     if isinstance(ast,AST.ASTStmtPer):
         stmtper()
-    if isinstance(ast,AST.ASTStmtPrint):
-        num = stack.pop()
-        print(num)
+
+def stmtprint():
+    num = stack.pop()
+    print(num)
 
 def stmtpush(ast : AST.ASTStmtPush):
     num = int(ast.num)
@@ -42,26 +45,20 @@ def stmtpush(ast : AST.ASTStmtPush):
 
 def stmtplus():
     nums = get2num()
-
     stack.append(nums[0] + nums[1])
 
 def stmtmin():
     nums = get2num()
-
     stack.append(nums[0] - nums[1])
 
 def stmtmul():
     nums = get2num()
-
     stack.append(nums[0] * nums[1])
 
 def stmtdiv():
     nums = get2num()
-
     stack.append(nums[0] / nums[1])
-
 
 def stmtper():
     nums = get2num()
-
     stack.append(nums[0] % nums[1])
