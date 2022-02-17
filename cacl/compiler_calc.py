@@ -19,7 +19,7 @@ class STK:
     def down(self):
         self.c +=1
 
-stk = STK(0)
+stk = STK(-1)
 
 def pushstk(num):
     print("PUSH",num)
@@ -64,7 +64,12 @@ def expr(ast : AST.Node):
 def exprass(ast : AST.ASTExprAss):
     name = ast.iden.name
     expr(ast.expr)
-    symtbl.put(name,stk.c)
+    
+    idx = symtbl.get(name)
+    if idx:
+        print("MOV",idx,stk.c)
+    else:
+        symtbl.put(name,stk.c)
 
 def exprunary(ast : AST.ASTExprUnary):
     opr = ast.oprator
@@ -91,4 +96,6 @@ def exprprim(ast : AST.Node):
     elif isinstance(ast,AST.ASTIden):
         name = ast.name
         idx  = symtbl.get(name)
-        print("MOV",idx)
+        if isinstance(idx,int) and idx > -1:
+            stk.up()
+            print("MOV",stk.c,idx)
