@@ -1,4 +1,7 @@
 import ast_lp as AST
+from lifepath.value_lp import numget
+
+stack = list()
 
 def interpreter(ast : AST.Node):
     if isinstance(ast,AST.ASTLp):
@@ -12,12 +15,8 @@ def lp(ast : AST.Node):
         interpreter(ast.children[1])
 
 def stmt(ast : AST.Node):
-    num = None
-    if len(ast.children) > 0:
-        num = ast.children[0]
-
     if isinstance(ast,AST.ASTStmtPush):
-        pass
+        stmtpush(ast)
     if isinstance(ast,AST.ASTStmtPlus):
         pass
     if isinstance(ast,AST.ASTStmtMin):
@@ -31,3 +30,6 @@ def stmt(ast : AST.Node):
     if isinstance(ast,AST.ASTStmtPrint):
         pass
 
+def stmtpush(ast : AST.ASTStmtPush):
+    num = numget(ast) 
+    stack.append(num)
