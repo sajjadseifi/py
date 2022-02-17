@@ -31,7 +31,7 @@ def stmt(ast : AST.Node):
     if isinstance(ast,AST.ASTStmtDiv):
         stmtdiv()
     if isinstance(ast,AST.ASTStmtPer):
-        pass
+        stmtper()
     if isinstance(ast,AST.ASTStmtPrint):
         pass
 
@@ -58,3 +58,9 @@ def stmtdiv():
     nums = get2num()
 
     stack.append(nums[0] / nums[1])
+
+
+def stmtper():
+    nums = get2num()
+
+    stack.append(nums[0] % nums[1])
