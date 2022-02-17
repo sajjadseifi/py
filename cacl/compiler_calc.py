@@ -38,7 +38,11 @@ def expr(ast : AST.Node):
         exprprim(ast)    
 
 def exprass(ast : AST.ASTExprAss):
-    pass
+    name = ast.iden.name
+    expr(ast.expr)
+    val = valget(ast.expr)
+    symtbl.put(name,val)
+    valset(ast,val)
 
 def exprunary(ast : AST.ASTExprUnary):
     pass
