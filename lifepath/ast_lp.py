@@ -36,14 +36,14 @@ class ASTStmtPush( ASTStmt ):
         self.children  = [num]
         super().__init__()
 
-class ASTStmtMov( ASTStmt ):
+class ASTStmtLoad( ASTStmt ):
     def __init__(self,tar,src):
         self.tar = tar
         self.src = src
         self.children  = [tar,src]
         super().__init__()
 
-class ASTStmtSet( ASTStmt ):
+class ASTStmtStore( ASTStmt ):
     def __init__(self,src):
         self.src = src
         self.children  = [src]
