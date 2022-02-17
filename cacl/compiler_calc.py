@@ -12,6 +12,8 @@ def compiler(ir:IR,ast : AST.Node):
     else:
         print("ast error: please entered root ast calc");
 
+    ir.finished()
+
 def calc(ir:IR,ast : AST.Node):
     if len(ast.children):
         stmt(ir,ast.first())
