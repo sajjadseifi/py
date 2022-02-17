@@ -20,7 +20,7 @@ def pushstk(num):
 def popstk():
     curidxstk = curidxstk - 1
 
-def interpret(ast : AST.Node):
+def compiler(ast : AST.Node):
     if isinstance(ast,AST.ASTCalc):
         calc(ast)
     else:
