@@ -47,10 +47,10 @@ def exprass(ir:IR,ast : AST.ASTExprAss):
     
     idx = symtbl.get(name)
 
-    last = ir.idxstk - 1
     if idx:
-        ir.mov(idx,last)
+        ir.store(idx)
     else:
+        last = ir.idxstk - 1
         print(name,last)
         symtbl.put(name,last)
 
@@ -92,4 +92,4 @@ def exprprim(ir:IR,ast : AST.Node):
         idx  = symtbl.get(name)
         if isinstance(idx,int) and idx > -1:
             ir.up()
-            ir.movld(idx)
+            ir.load(idx)

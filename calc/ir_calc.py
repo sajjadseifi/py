@@ -19,11 +19,11 @@ class IR:
         self.w("PUSH %s" % num)
         self.up()
     
-    def mov(self,tar,src):
-        self.w("MOV %s %s" % (tar,src))
+    def load(self,src):
+        self.w("LD %s" % (src))
     
-    def movld(self,src):
-        self.w("MOV %s" % (src))
+    def store(self,src):
+        self.w("ST %s" % (src))
     
     def print(self):
         self.w("PRINT")
