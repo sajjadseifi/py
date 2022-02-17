@@ -9,7 +9,8 @@
     MULT : replace 2 last element of stack with result of multipy
     DIV : replace 2 last element of stack with result of division
     PRINT : print of last element on stack
-    MOV (tar) (src) : set value of source index to target index
+    ST (src) : pop last item and set data to source index 
+    LD (src) : get data in source index and push to last element 
 ```
 
 <h2>Lexical Grammar</h2>
@@ -30,8 +31,8 @@
     
     stmt :=
         PUSH num    |
-        MOV num     |
-        SET num     |
+        LD num      |
+        ST num      |
         PLUS        |
         MIN         |
         MUL         |
