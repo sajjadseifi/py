@@ -8,6 +8,7 @@ Description IR Code
     MULT replace 2 last element of stack with result of multipy
     DIV replace 2 last element of stack with result of division
     PRINT print of last element on stack
+    MOV tar src set value of source index to target index
 ```
 
 # Lexical Grammar
@@ -28,6 +29,7 @@ Description IR Code
     
     stmt :=
         PUSH num    |
+        MOV num num |
         PLUS        |
         MIN         |
         MUL         |
