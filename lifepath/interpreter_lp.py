@@ -1,18 +1,7 @@
 import ast_lp as AST
+from stack_lp import Stack
 
-stack = list()
-def get2num():
-    if len(stack) < 2:
-        print("stack size not enouf size for calculate")
-        exit(1)
-
-    r = stack.pop()
-    l = stack.pop()
-
-    return (l,r) 
-
-def setnum(num):
-    stack.append(int(num))
+stklp = Stack(1024)
 
 def interpreter(ast : AST.Node):
     if isinstance(ast,AST.ASTLp):
@@ -43,43 +32,47 @@ def stmt(ast : AST.Node):
     if isinstance(ast,AST.ASTStmtPer):
         stmtper()
 
-    print(stack)
+    stklp.print()
 
 def stmtprint():
-    num = stack.pop()
+    num = stklp.pop()
     print(num)
 
 def stmtpush(ast : AST.ASTStmtPush):
     num = int(ast.num)
-    stack.append(num)
+    stklp.push(num)
 
 def stmtmov(ast : AST.ASTStmtMov):
-    if ast.tar < 0:
-        print("out of bounds target",ast.tar)
-    if ast.src < 0:
-        print("out of bounds source",ast.tar)
+    tar = int(ast.tar)
+    src = int(ast.src)
+    
+    if tar < 0 or tar >= stklp.size:
+        print("out of bounds target",tar)
+    if src < 0 or src >= stklp.size:
+        print("out of bounds source",tar)
     else:
-        stack[ast.tar] = stack[ast.src]
+        ldnum = stklp.get(src)
+        stklp.set(tar,ldnum);
         return
 
     exit(1)
 
 def stmtplus():
-    nums = get2num()
-    setnum(nums[0] + nums[1])
+    nums = stklp.popn(2)
+    stklp.push(nums[0] + nums[1])
 
 def stmtmin():
-    nums = get2num()
-    setnum(nums[0] - nums[1])
+    nums = stklp.popn(2)
+    stklp.push(nums[0] - nums[1])
 
 def stmtmul():
-    nums = get2num()
-    setnum(nums[0] * nums[1])
+    nums = stklp.popn(2)
+    stklp.push(nums[0] * nums[1])
 
 def stmtdiv():
-    nums = get2num()
-    setnum(nums[0] / nums[1])
+    nums = stklp.popn(2)
+    stklp.push(nums[0] / nums[1])
 
 def stmtper():
-    nums = get2num()
-    setnum(nums[0] % nums[1])
+    nums = stklp.popn(2)
+    stklp.push(nums[0] % nums[1])
