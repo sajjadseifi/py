@@ -47,7 +47,7 @@ def exprass(ir:IR,ast : AST.ASTExprAss):
     
     idx = symtbl.get(name)
 
-    if idx:
+    if isinstance(idx,int) and idx > -1:
         ir.store(idx)
     else:
         last = ir.idxstk - 1
@@ -81,7 +81,8 @@ def exprcalc(ir:IR,ast : AST.ASTExprCacluate):
         ir.per()
 
 def exprmath(ir:IR,ast : AST.ASTExprCall):
-    pass
+    call = ast.iden.name
+    expr(ir,ast.expr)
 
 def exprprim(ir:IR,ast : AST.Node):
     if isinstance(ast,AST.ASTNum):
@@ -91,5 +92,4 @@ def exprprim(ir:IR,ast : AST.Node):
         name = ast.name
         idx  = symtbl.get(name)
         if isinstance(idx,int) and idx > -1:
-            ir.up()
             ir.load(idx)

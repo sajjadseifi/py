@@ -21,10 +21,12 @@ class IR:
     
     def load(self,src):
         self.w("LD %s" % (src))
-    
+        self.up()
+
     def store(self,src):
         self.w("ST %s" % (src))
-    
+        self.down()
+
     def print(self):
         self.w("PRINT")
         self.down()
