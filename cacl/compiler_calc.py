@@ -16,7 +16,15 @@ def calc(ast : AST.Node):
         interpret(ast.children[1])
     
 def stmt(ast : AST.ASTStmt):
-    pass
+    if isinstance(ast,AST.ASTStmtExpr):
+        expr(ast.first())
+    elif isinstance(ast,AST.ASTStmtPrint):
+        cast = ast.first()
+        expr(cast)
+        print("PRINT")
+    else:
+        print("ast error: this ast is not stmt");
+
 
 def expr(ast : AST.Node):
     pass
