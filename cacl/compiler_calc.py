@@ -1,5 +1,5 @@
 import ast_calc as AST
-from cacl.ir_calc import IR
+from ir_calc import IR
 from value_calc import valget, valset
 from symbols_calc import Symbols 
 #semantic
@@ -17,7 +17,7 @@ def compiler(ir:IR,ast : AST.Node):
 def calc(ir:IR,ast : AST.Node):
     if len(ast.children):
         stmt(ir,ast.first())
-        compiler(ast.children[1])
+        compiler(ir,ast.children[1])
     
 def stmt(ir:IR,ast : AST.ASTStmt):
     if isinstance(ast,AST.ASTStmtExpr):
@@ -43,7 +43,7 @@ def expr(ir:IR,ast : AST.Node):
 
 def exprass(ir:IR,ast : AST.ASTExprAss):
     name = ast.iden.name
-    expr(ast.expr)
+    expr(ir,ast.expr)
     
     idx = symtbl.get(name)
 
@@ -54,7 +54,7 @@ def exprass(ir:IR,ast : AST.ASTExprAss):
 
 def exprunary(ir:IR,ast : AST.ASTExprUnary):
     opr = ast.oprator
-    expr(ast.expr)
+    expr(ir,ast.expr)
 
     ir.push(opr + 1)
     ir.mul()
@@ -62,8 +62,8 @@ def exprunary(ir:IR,ast : AST.ASTExprUnary):
 
 def exprcalc(ir:IR,ast : AST.ASTExprCacluate):
     #sub expersion
-    expr(ast.left)
-    expr(ast.right)
+    expr(ir,ast.left)
+    expr(ir,ast.right)
 
     #print
     op = ast.oprator 
