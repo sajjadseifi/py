@@ -1,6 +1,5 @@
 # Tasks
 
-<<<<<<< HEAD
 <ul>
     <li>
         <span>Complet</span>
