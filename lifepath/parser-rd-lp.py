@@ -20,7 +20,12 @@ class ParserRD:
     def __init__(self,lex : Lexer):
         self.lex = lex
 
-    def lp():
-        pass
-    def stmt():
+    def lp(self):
+        if self.lex.eof():
+            return
+
+        self.stmt()
+        self.lp()
+
+    def stmt(self):
         pass
